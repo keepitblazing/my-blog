@@ -3,7 +3,7 @@ import Navbar from "@/components/Navbar";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "My Blog",
+  title: "Keep it blazing",
   description: "개인 블로그입니다.",
 };
 
@@ -14,9 +14,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className="min-h-screen bg-black text-white">
+      <body
+        suppressHydrationWarning
+        className="min-h-screen bg-black text-white"
+      >
         <Navbar />
-        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 border-t border-[#222225]">
+        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           {children}
         </main>
       </body>
