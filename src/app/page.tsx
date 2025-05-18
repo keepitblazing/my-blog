@@ -16,22 +16,20 @@ const posts: Post[] = [
 export default function Home() {
   return (
     <div className="space-y-8">
-      <h1 className="text-3xl font-bold text-gray-900">최신 글</h1>
+      <h1 className="text-3xl font-bold">최신 글</h1>
       <div className="grid gap-6">
         {posts.map((post) => (
           <article
             key={post.id}
-            className="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow"
+            className="border-2 border-[#222225] p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow"
           >
             <Link href={`/posts/${post.id}`}>
-              <h2 className="text-xl font-semibold text-gray-900 mb-2">
-                {post.title}
-              </h2>
-              <div className="text-sm text-gray-500 mb-4">
+              <h2 className="text-xl font-semibold mb-2">{post.title}</h2>
+              <div className="text-sm mb-4">
                 {new Date(post.createdAt).toLocaleDateString("ko-KR")} •{" "}
                 {post.author}
               </div>
-              <p className="text-gray-600 line-clamp-2">{post.content}</p>
+              <p className="line-clamp-2">{post.content}</p>
             </Link>
           </article>
         ))}
