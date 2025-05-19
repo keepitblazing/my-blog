@@ -19,10 +19,7 @@ export default function RootLayout({
           property="og:description"
           content="개발 관련 글을 작성하고 공유하는 블로그입니다."
         />
-        <meta
-          property="og:image"
-          content="https://your-vercel-domain.vercel.app/door.png"
-        />
+        <meta property="og:image" content="https://keepitblazing.kr/door.png" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:type" content="image/png" />
@@ -34,7 +31,7 @@ export default function RootLayout({
         />
         <meta
           name="twitter:image"
-          content="https://your-vercel-domain.vercel.app/door.png"
+          content="https://keepitblazing.kr/door.png"
         />
       </head>
       <body
