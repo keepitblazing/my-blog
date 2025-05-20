@@ -5,6 +5,12 @@ import { NextRequest, NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import { v4 as uuidv4 } from "uuid";
 import dayjs from "dayjs";
+import timezone from "dayjs/plugin/timezone";
+import utc from "dayjs/plugin/utc";
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
+dayjs.tz.setDefault("Asia/Seoul");
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -17,6 +23,10 @@ export async function POST(req: NextRequest) {
     const ip = forwardedFor ? forwardedFor.split(",")[0] : "unknown";
     const userAgent = req.headers.get("user-agent") || "";
     const cookieStore = await cookies();
+
+    // 현재 시간을 서울 시간으로 설정
+    const now = dayjs().tz("Asia/Seoul");
+    const today = now.format("YYYY-MM-DD");
 
     // 세션 ID 확인 또는 생성
     let sessionId = cookieStore.get("session_id")?.value;
@@ -62,11 +72,10 @@ export async function POST(req: NextRequest) {
         user_agent: userAgent,
         page_path: new URL(req.url).pathname,
         is_new_visitor: true,
-        visited_at: new Date().toISOString(),
+        visited_at: now.toISOString(),
       });
 
       // 일별 방문자 수 업데이트
-      const today = dayjs().format("YYYY-MM-DD");
       const { data: existingDaily } = await supabase
         .from("daily_visitors")
         .select("count")
@@ -104,58 +113,33 @@ export async function GET(req: NextRequest) {
 
   try {
     if (type === "total") {
-      // 전체 방문자 수 조회 (중복 제거)
-      const { data: totalData, error: totalError } = await supabase
+      // 가장 최근 visitor_logs 레코드 조회
+      const { data: latestVisitor, error: visitorError } = await supabase
         .from("visitor_logs")
-        .select("visitor_hash")
-        .not("visitor_hash", "is", null)
-        .order("visitor_hash");
+        .select("id")
+        .order("visited_at", { ascending: false })
+        .limit(1)
+        .single();
 
-      if (totalError) throw totalError;
-
-      // 중복 제거된 visitor_hash 수 계산
-      const uniqueVisitors = new Set(
-        totalData?.map((record) => record.visitor_hash)
-      );
+      if (visitorError) throw visitorError;
 
       return NextResponse.json({
-        count: uniqueVisitors.size,
+        count: latestVisitor?.id || 0,
         type: "total",
       });
     } else {
-      // 현재 날짜
-      const today = dayjs().format("YYYY-MM-DD");
-
       // 가장 최근 daily_visitors 레코드 조회
-      const { data: latestRecord } = await supabase
-        .from("daily_visitors")
-        .select("date")
-        .order("date", { ascending: false })
-        .limit(1)
-        .maybeSingle();
-
-      // 가장 최근 레코드가 없거나, 오늘 날짜가 아닌 경우
-      if (!latestRecord || latestRecord.date !== today) {
-        // 새로운 날짜 레코드 생성
-        await supabase
-          .from("daily_visitors")
-          .insert([{ date: today, count: 0 }]);
-
-        return NextResponse.json({
-          count: 0,
-          type: "daily",
-        });
-      }
-
-      // 오늘 날짜의 카운트 조회
-      const { data: todayCount } = await supabase
+      const { data: latestDaily, error: dailyError } = await supabase
         .from("daily_visitors")
         .select("count")
-        .eq("date", today)
+        .order("date", { ascending: false })
+        .limit(1)
         .single();
 
+      if (dailyError) throw dailyError;
+
       return NextResponse.json({
-        count: todayCount?.count || 0,
+        count: latestDaily?.count || 0,
         type: "daily",
       });
     }
