@@ -11,6 +11,8 @@ export default function Navbar() {
   const [mounted, setMounted] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [dailyVisitorCount, setDailyVisitorCount] = useState(0);
+  const [totalVisitorCount, setTotalVisitorCount] = useState(0);
 
   useEffect(() => {
     setMounted(true);
@@ -25,7 +27,28 @@ export default function Navbar() {
       }
     };
 
+    const fetchVisitorCounts = async () => {
+      try {
+        // 일일 방문자 수 조회
+        const dailyResponse = await fetch("/api/visitor");
+        const dailyData = await dailyResponse.json();
+        setDailyVisitorCount(dailyData.count);
+
+        // 전체 방문자 수 조회
+        const totalResponse = await fetch("/api/visitor?type=total");
+        const totalData = await totalResponse.json();
+        setTotalVisitorCount(totalData.count);
+      } catch (error) {
+        console.error("방문자 수 조회 중 오류 발생:", error);
+      }
+    };
+
     checkAdminStatus();
+    fetchVisitorCounts();
+
+    // 1분마다 방문자 수 업데이트
+    const interval = setInterval(fetchVisitorCounts, 60000);
+    return () => clearInterval(interval);
   }, []);
 
   // 모바일 메뉴가 열릴 때 스크롤 방지
@@ -53,6 +76,17 @@ export default function Navbar() {
                 <Link href="/" className="text-xl font-bold text-white">
                   Keep it blazing🔥
                 </Link>
+              </div>
+              <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
+                <span
+                  className={`inline-flex items-center px-1 pt-1 border-b-3 text-sm font-medium ${
+                    pathname === "/"
+                      ? "border-[#222225] text-white"
+                      : "border-transparent text-gray-400 hover:border-[#222225] hover:text-white"
+                  }`}
+                >
+                  홈
+                </span>
               </div>
             </div>
           </div>
@@ -97,8 +131,18 @@ export default function Navbar() {
                 )}
               </div>
             </div>
+            {/* 방문자 수 표시 */}
+            <div className="hidden sm:flex items-center text-sm text-gray-400 space-x-4">
+              <span>Today: {dailyVisitorCount}</span>
+              <span>Total: {totalVisitorCount}</span>
+            </div>
             {/* 모바일 메뉴 버튼 */}
             <div className="flex items-center sm:hidden">
+              <div className="mr-4 text-sm text-gray-400">
+                <span>
+                  👥 {dailyVisitorCount} | {totalVisitorCount}
+                </span>
+              </div>
               <button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-[#222225] focus:outline-none"

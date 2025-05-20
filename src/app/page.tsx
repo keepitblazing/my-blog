@@ -48,10 +48,12 @@ export default function Home() {
               className="border-2 border-[#222225] p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow"
             >
               <Link href={`/post/${post.id}`}>
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between pt-2 pb-5">
                   <h2 className="text-xl font-semibold mb-2">{post.title}</h2>
+                  <div className="text-sm mb-4">
+                    {formatDate(post.createdAt)}
+                  </div>
                 </div>
-                <div className="text-sm mb-4">{formatDate(post.createdAt)}</div>
                 <p className="line-clamp-2">{post.content}</p>
               </Link>
             </article>
