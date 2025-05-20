@@ -30,7 +30,7 @@ export async function getPostById(id: string) {
   return data as Post;
 }
 
-export async function createPost(post: Omit<Post, "id" | "createdAt">) {
+export async function createPost(post: Omit<Post, "id" | "created_at">) {
   const { data, error } = await supabase
     .from("post")
     .insert([post])
