@@ -32,7 +32,7 @@ export default function Home() {
 
   return (
     <div className="space-y-8">
-      <h1 className="text-3xl font-bold">최신 글</h1>
+      <h1 className="text-xl font-bold">최신 글</h1>
       {posts.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-12 border-2 border-[#222225] rounded-lg">
           <p className="text-xl text-gray-400 mb-4">

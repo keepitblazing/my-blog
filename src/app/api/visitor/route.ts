@@ -4,6 +4,7 @@ import { createHash } from "crypto";
 import { NextRequest, NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import { v4 as uuidv4 } from "uuid";
+import dayjs from "dayjs";
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -61,11 +62,30 @@ export async function POST(req: NextRequest) {
         user_agent: userAgent,
         page_path: new URL(req.url).pathname,
         is_new_visitor: true,
+        visited_at: new Date().toISOString(),
       });
 
       // 일별 방문자 수 업데이트
-      const today = new Date().toISOString().split("T")[0];
-      await supabase.rpc("increment_daily_visitor", { visit_date: today });
+      const today = dayjs().format("YYYY-MM-DD");
+      const { data: existingDaily } = await supabase
+        .from("daily_visitors")
+        .select("count")
+        .eq("date", today)
+        .single();
+
+      if (!existingDaily) {
+        // 새로운 날짜의 레코드 생성
+        await supabase.from("daily_visitors").insert({
+          date: today,
+          count: 1,
+        });
+      } else {
+        // 기존 날짜의 카운트 증가
+        await supabase
+          .from("daily_visitors")
+          .update({ count: existingDaily.count + 1 })
+          .eq("date", today);
+      }
     }
 
     return NextResponse.json({ success: true });
@@ -103,16 +123,39 @@ export async function GET(req: NextRequest) {
         type: "total",
       });
     } else {
-      // 일일 방문자 수 조회 (기존 로직)
-      const today = new Date().toISOString().split("T")[0];
-      const { data } = await supabase
+      // 현재 날짜
+      const today = dayjs().format("YYYY-MM-DD");
+
+      // 가장 최근 daily_visitors 레코드 조회
+      const { data: latestRecord } = await supabase
+        .from("daily_visitors")
+        .select("date")
+        .order("date", { ascending: false })
+        .limit(1)
+        .maybeSingle();
+
+      // 가장 최근 레코드가 없거나, 오늘 날짜가 아닌 경우
+      if (!latestRecord || latestRecord.date !== today) {
+        // 새로운 날짜 레코드 생성
+        await supabase
+          .from("daily_visitors")
+          .insert([{ date: today, count: 0 }]);
+
+        return NextResponse.json({
+          count: 0,
+          type: "daily",
+        });
+      }
+
+      // 오늘 날짜의 카운트 조회
+      const { data: todayCount } = await supabase
         .from("daily_visitors")
         .select("count")
         .eq("date", today)
         .single();
 
       return NextResponse.json({
-        count: data?.count || 0,
+        count: todayCount?.count || 0,
         type: "daily",
       });
     }
