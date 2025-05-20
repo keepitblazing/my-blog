@@ -98,7 +98,7 @@ export default function PostDetail() {
           게시글을 찾을 수 없습니다
         </h1>
         <Link
-          href="/post"
+          href="/"
           className="inline-flex items-center gap-2 px-4 py-2 text-white bg-[#222225] rounded-lg hover:bg-[#2a2a2f] transition-colors"
         >
           <FontAwesomeIcon icon={faArrowLeft} />
@@ -111,7 +111,7 @@ export default function PostDetail() {
   return (
     <div className="max-w-4xl mx-auto space-y-8 py-8">
       <Link
-        href="/post"
+        href="/"
         className="inline-flex items-center gap-2 px-4 py-2 text-white rounded-lg hover:bg-[#2a2a2f] transition-colors w-fit"
       >
         <FontAwesomeIcon icon={faArrowLeft} />
@@ -121,7 +121,7 @@ export default function PostDetail() {
       <article className="border-2 border-[#222225] p-8 rounded-lg">
         <h1 className="text-3xl font-bold mb-4 text-gray-100">{post.title}</h1>
         <div className="text-sm text-gray-400 mb-8 border-b border-[#222225] pb-4 text-right">
-          {formatDate(post.createdAt)}
+          {formatDate(post.created_at)}
         </div>
         <div className="markdown-body prose prose-invert max-w-none text-gray-200 leading-relaxed">
           <ReactMarkdown

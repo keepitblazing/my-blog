@@ -51,7 +51,7 @@ export default function Home() {
                 <div className="flex items-center justify-between pt-2 pb-5">
                   <h2 className="text-xl font-semibold mb-2">{post.title}</h2>
                   <div className="text-sm mb-4">
-                    {formatDate(post.createdAt)}
+                    {formatDate(post.created_at)}
                   </div>
                 </div>
                 <p className="line-clamp-2">{post.content}</p>
