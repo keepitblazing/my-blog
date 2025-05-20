@@ -4,7 +4,8 @@ import Link from "next/link";
 import { Post } from "@/types/post";
 import { formatDate } from "@/lib/utils";
 import { useEffect, useState } from "react";
-import supabase from "@/app/lib/supabaseClient";
+import { getPosts } from "@/lib/supabase/post";
+import Spinner from "@/components/Spinner";
 
 export default function Home() {
   const [posts, setPosts] = useState<Post[]>([]);
@@ -12,26 +13,22 @@ export default function Home() {
 
   useEffect(() => {
     const fetchPosts = async () => {
-      const { data, error } = await supabase
-        .from("post")
-        .select("*")
-        .order("created_at", { ascending: false });
-      if (error) {
+      try {
+        const data = await getPosts();
+        setPosts(data);
+      } catch (error) {
         console.error(error);
-        return;
+      } finally {
+        setLoading(false);
       }
-      setPosts(data || []);
-      setLoading(false);
     };
 
     fetchPosts();
   }, []);
 
   if (loading) {
-    return <div>로딩 중...</div>;
+    return <Spinner />;
   }
-
-  console.log(posts);
 
   return (
     <div className="space-y-8">
@@ -54,9 +51,7 @@ export default function Home() {
                 <div className="flex items-center justify-between">
                   <h2 className="text-xl font-semibold mb-2">{post.title}</h2>
                 </div>
-                <div className="text-sm mb-4">
-                  {formatDate(post.createdAt)} • {post.author}
-                </div>
+                <div className="text-sm mb-4">{formatDate(post.createdAt)}</div>
                 <p className="line-clamp-2">{post.content}</p>
               </Link>
             </article>

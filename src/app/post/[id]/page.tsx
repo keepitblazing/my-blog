@@ -5,9 +5,67 @@ import { useParams } from "next/navigation";
 import Link from "next/link";
 import { Post } from "@/types/post";
 import { formatDate } from "@/lib/utils";
-import supabase from "@/app/lib/supabaseClient";
+import { getPostById } from "@/lib/supabase/post";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import remarkBreaks from "remark-breaks";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
+import type { Components } from "react-markdown";
+import Spinner from "@/components/Spinner";
+
+const components: Components = {
+  code({ className, children, ...props }) {
+    const match = /language-(\w+)/.exec(className || "");
+    const language = match ? match[1] : "";
+
+    if (language) {
+      return (
+        <div className="relative">
+          <SyntaxHighlighter
+            language={language}
+            style={vscDarkPlus}
+            customStyle={{
+              margin: 0,
+              borderRadius: "0.5rem",
+              padding: "1rem",
+            }}
+          >
+            {String(children).replace(/\n$/, "")}
+          </SyntaxHighlighter>
+        </div>
+      );
+    }
+
+    return (
+      <code className="bg-[#1a1a1d] px-1.5 py-0.5 rounded text-sm" {...props}>
+        {children}
+      </code>
+    );
+  },
+  // 링크 스타일
+  a: ({ ...props }) => (
+    <a className="text-blue-400 hover:underline" {...props} />
+  ),
+  // 인용구 스타일
+  blockquote: ({ ...props }) => (
+    <blockquote className="border-l-4 border-gray-600 pl-4 italic" {...props} />
+  ),
+  // 테이블 스타일
+  table: ({ ...props }) => (
+    <div className="overflow-x-auto">
+      <table className="min-w-full divide-y divide-gray-700" {...props} />
+    </div>
+  ),
+  th: ({ ...props }) => (
+    <th className="px-4 py-2 bg-[#1a1a1d] text-left" {...props} />
+  ),
+  td: ({ ...props }) => (
+    <td className="px-4 py-2 border-t border-gray-700" {...props} />
+  ),
+};
 
 export default function PostDetail() {
   const params = useParams();
@@ -16,26 +74,21 @@ export default function PostDetail() {
 
   useEffect(() => {
     const fetchPost = async () => {
-      const { data, error } = await supabase
-        .from("post")
-        .select("*")
-        .eq("id", params.id)
-        .single();
-
-      if (error) {
+      try {
+        const data = await getPostById(params.id as string);
+        setPost(data);
+      } catch (error) {
         console.error(error);
-        return;
+      } finally {
+        setLoading(false);
       }
-
-      setPost(data);
-      setLoading(false);
     };
 
     fetchPost();
   }, [params.id]);
 
   if (loading) {
-    return <div>로딩 중...</div>;
+    return <Spinner />;
   }
 
   if (!post) {
@@ -70,8 +123,13 @@ export default function PostDetail() {
         <div className="text-sm text-gray-400 mb-8 border-b border-[#222225] pb-4 text-right">
           {formatDate(post.createdAt)}
         </div>
-        <div className="prose prose-invert max-w-none text-gray-200 leading-relaxed">
-          {post.content}
+        <div className="markdown-body prose prose-invert max-w-none text-gray-200 leading-relaxed">
+          <ReactMarkdown
+            remarkPlugins={[remarkGfm, remarkBreaks]}
+            components={components}
+          >
+            {post.content}
+          </ReactMarkdown>
         </div>
       </article>
     </div>

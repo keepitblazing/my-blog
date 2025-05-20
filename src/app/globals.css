@@ -19,3 +19,113 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: rotate(-5deg);
+  }
+  25% {
+    transform: rotate(5deg) scale(1.1);
+  }
+  50% {
+    transform: rotate(-5deg) scale(1);
+  }
+  75% {
+    transform: rotate(5deg) scale(1.1);
+  }
+}
+
+.animate-shake {
+  animation: shake 1s ease-in-out infinite;
+  display: inline-block;
+  transform-origin: center;
+}
+
+@keyframes flame {
+  0%,
+  100% {
+    transform: scale(1) rotate(-5deg);
+    opacity: 1;
+  }
+  25% {
+    transform: scale(1.2) rotate(5deg);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(0.9) rotate(-5deg);
+    opacity: 1;
+  }
+  75% {
+    transform: scale(1.1) rotate(5deg);
+    opacity: 0.9;
+  }
+}
+
+@keyframes flame2 {
+  0%,
+  100% {
+    transform: scale(1.1) rotate(5deg);
+    opacity: 0.8;
+  }
+  25% {
+    transform: scale(0.9) rotate(-5deg);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2) rotate(5deg);
+    opacity: 0.9;
+  }
+  75% {
+    transform: scale(1) rotate(-5deg);
+    opacity: 1;
+  }
+}
+
+@keyframes flame3 {
+  0%,
+  100% {
+    transform: scale(0.9) rotate(-3deg);
+    opacity: 0.9;
+  }
+  25% {
+    transform: scale(1.1) rotate(3deg);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1) rotate(-3deg);
+    opacity: 0.8;
+  }
+  75% {
+    transform: scale(1.2) rotate(3deg);
+    opacity: 1;
+  }
+}
+
+.flame-container {
+  position: relative;
+  display: inline-block;
+}
+
+.flame {
+  position: absolute;
+  top: 0;
+  left: 0;
+  animation: flame 1.5s ease-in-out infinite;
+}
+
+.flame2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  animation: flame2 1.7s ease-in-out infinite;
+  opacity: 0.8;
+}
+
+.flame3 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  animation: flame3 1.3s ease-in-out infinite;
+  opacity: 0.9;
+}
