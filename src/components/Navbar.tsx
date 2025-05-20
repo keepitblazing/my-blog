@@ -119,14 +119,14 @@ export default function Navbar() {
                 </Link>
                 {isAdmin && (
                   <Link
-                    href="/admin"
+                    href="/write"
                     className={`inline-flex items-center px-1 pt-1 border-b-3 text-sm font-medium ${
                       pathname === "/admin"
                         ? "border-[#222225] text-white"
                         : "border-transparent text-gray-400 hover:border-[#222225] hover:text-white"
                     }`}
                   >
-                    관리자
+                    글쓰기
                   </Link>
                 )}
               </div>

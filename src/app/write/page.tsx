@@ -1,8 +1,20 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import Router from "next/router";
 
-export default function AdminPage() {
+export default function Write() {
+  useEffect(() => {
+    const checkAdmin = async () => {
+      const response = await fetch("/api/check-admin");
+      const data = await response.json();
+      if (!data.isAdmin) {
+        Router.push("/");
+      }
+    };
+    checkAdmin();
+  }, []);
+
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
 
