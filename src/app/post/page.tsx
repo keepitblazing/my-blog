@@ -3,9 +3,36 @@
 import Link from "next/link";
 import { Post } from "@/types/post";
 import { formatDate } from "@/lib/utils";
+import { useEffect, useState } from "react";
+import supabase from "@/app/lib/supabaseClient";
 
 export default function Home() {
-  const posts: Post[] = [];
+  const [posts, setPosts] = useState<Post[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      const { data, error } = await supabase
+        .from("post")
+        .select("*")
+        .order("created_at", { ascending: false });
+      if (error) {
+        console.error(error);
+        return;
+      }
+      setPosts(data || []);
+      setLoading(false);
+    };
+
+    fetchPosts();
+  }, []);
+
+  if (loading) {
+    return <div>로딩 중...</div>;
+  }
+
+  console.log(posts);
+
   return (
     <div className="space-y-8">
       <h1 className="text-3xl font-bold">최신 글</h1>
@@ -23,8 +50,10 @@ export default function Home() {
               key={post.id}
               className="border-2 border-[#222225] p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow"
             >
-              <Link href={`/posts/${post.id}`}>
-                <h2 className="text-xl font-semibold mb-2">{post.title}</h2>
+              <Link href={`/post/${post.id}`}>
+                <div className="flex items-center justify-between">
+                  <h2 className="text-xl font-semibold mb-2">{post.title}</h2>
+                </div>
                 <div className="text-sm mb-4">
                   {formatDate(post.createdAt)} • {post.author}
                 </div>
