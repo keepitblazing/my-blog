@@ -140,7 +140,7 @@ export default function Navbar() {
             <div className="flex items-center sm:hidden">
               <div className="mr-4 text-sm text-gray-400">
                 <span>
-                  👥 {dailyVisitorCount} | {totalVisitorCount}
+                  {dailyVisitorCount} | {totalVisitorCount}
                 </span>
               </div>
               <button
