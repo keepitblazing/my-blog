@@ -1,16 +1,23 @@
+"use client";
+
 import "./globals.css";
 import Navbar from "@/components/Navbar";
-
-export const metadata = {
-  title: "Keep it blazing🔥",
-  description: "개발 관련 글을 작성하고 공유하는 블로그입니다.",
-};
+import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const pathname = usePathname();
+
+  useEffect(() => {
+    fetch("/api/visitor", {
+      method: "POST",
+    }).catch(console.error);
+  }, [pathname]);
+
   return (
     <html lang="ko">
       <head>
