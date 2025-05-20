@@ -121,7 +121,7 @@ export default function Navbar() {
                   <Link
                     href="/write"
                     className={`inline-flex items-center px-1 pt-1 border-b-3 text-sm font-medium ${
-                      pathname === "/admin"
+                      pathname === "/write"
                         ? "border-[#222225] text-white"
                         : "border-transparent text-gray-400 hover:border-[#222225] hover:text-white"
                     }`}
@@ -195,15 +195,15 @@ export default function Navbar() {
             </Link>
             {isAdmin && (
               <Link
-                href="/admin"
+                href="/write"
                 className={`block px-3 py-2 text-base font-medium transition-colors duration-200 rounded-md ${
-                  pathname === "/admin"
+                  pathname === "/write"
                     ? "bg-[#1a1a1a] text-white"
                     : "text-gray-400 hover:bg-[#1a1a1a] hover:text-white"
                 }`}
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                관리자
+                글쓰기
               </Link>
             )}
           </div>
