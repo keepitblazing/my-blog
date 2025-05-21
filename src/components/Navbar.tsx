@@ -6,8 +6,63 @@ import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
 
-export default function Navbar() {
+interface NavLink {
+  href: string;
+  label: string;
+  adminOnly?: boolean;
+}
+
+const NAV_LINKS: NavLink[] = [
+  { href: "/", label: "홈" },
+  { href: "/dev", label: "개발" },
+  { href: "/diary", label: "일기" },
+  { href: "/post/create", label: "글쓰기", adminOnly: true },
+];
+
+interface NavLinkProps {
+  href: string;
+  label: string;
+  onClick?: () => void;
+  isMobile?: boolean;
+}
+
+const NavLinkComponent = ({ href, label, onClick, isMobile }: NavLinkProps) => {
   const pathname = usePathname();
+  const isCurrentPath =
+    href === "/" ? pathname === "/" : pathname.startsWith(href);
+
+  if (isMobile) {
+    return (
+      <Link
+        href={href}
+        className={`block px-3 py-2 text-base font-medium transition-colors duration-200 rounded-md ${
+          isCurrentPath
+            ? "bg-[#1a1a1a] text-white"
+            : "text-gray-400 hover:bg-[#1a1a1a] hover:text-white"
+        }`}
+        onClick={onClick}
+      >
+        {label}
+      </Link>
+    );
+  }
+
+  return (
+    <Link
+      href={href}
+      className={`inline-flex items-center px-1 pt-1 border-b-3 text-sm font-medium ${
+        isCurrentPath
+          ? "border-[#222225] text-white"
+          : "border-transparent text-gray-400 hover:border-[#222225] hover:text-white"
+      }`}
+      onClick={onClick}
+    >
+      {label}
+    </Link>
+  );
+};
+
+export default function Navbar() {
   const [mounted, setMounted] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -78,15 +133,7 @@ export default function Navbar() {
                 </Link>
               </div>
               <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
-                <span
-                  className={`inline-flex items-center px-1 pt-1 border-b-3 text-sm font-medium ${
-                    pathname === "/"
-                      ? "border-[#222225] text-white"
-                      : "border-transparent text-gray-400 hover:border-[#222225] hover:text-white"
-                  }`}
-                >
-                  홈
-                </span>
+                <NavLinkComponent href="/" label="홈" isMobile={false} />
               </div>
             </div>
           </div>
@@ -107,27 +154,16 @@ export default function Navbar() {
                 </Link>
               </div>
               <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
-                <Link
-                  href="/"
-                  className={`inline-flex items-center px-1 pt-1 border-b-3 text-sm font-medium ${
-                    pathname === "/"
-                      ? "border-[#222225] text-white"
-                      : "border-transparent text-gray-400 hover:border-[#222225] hover:text-white"
-                  }`}
-                >
-                  홈
-                </Link>
-                {isAdmin && (
-                  <Link
-                    href="/post/create"
-                    className={`inline-flex items-center px-1 pt-1 border-b-3 text-sm font-medium ${
-                      pathname === "/post/create"
-                        ? "border-[#222225] text-white"
-                        : "border-transparent text-gray-400 hover:border-[#222225] hover:text-white"
-                    }`}
-                  >
-                    글쓰기
-                  </Link>
+                {NAV_LINKS.map(
+                  (link) =>
+                    (!link.adminOnly || isAdmin) && (
+                      <NavLinkComponent
+                        key={link.href}
+                        href={link.href}
+                        label={link.label}
+                        isMobile={false}
+                      />
+                    )
                 )}
               </div>
             </div>
@@ -182,29 +218,17 @@ export default function Navbar() {
           }}
         >
           <div className="px-4 py-3 space-y-1">
-            <Link
-              href="/"
-              className={`block px-3 py-2 text-base font-medium transition-colors duration-200 rounded-md ${
-                pathname === "/"
-                  ? "bg-[#1a1a1a] text-white"
-                  : "text-gray-400 hover:bg-[#1a1a1a] hover:text-white"
-              }`}
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              홈
-            </Link>
-            {isAdmin && (
-              <Link
-                href="/post/create"
-                className={`block px-3 py-2 text-base font-medium transition-colors duration-200 rounded-md ${
-                  pathname === "/post/create"
-                    ? "bg-[#1a1a1a] text-white"
-                    : "text-gray-400 hover:bg-[#1a1a1a] hover:text-white"
-                }`}
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                글쓰기
-              </Link>
+            {NAV_LINKS.map(
+              (link) =>
+                (!link.adminOnly || isAdmin) && (
+                  <NavLinkComponent
+                    key={link.href}
+                    href={link.href}
+                    label={link.label}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    isMobile={true}
+                  />
+                )
             )}
           </div>
         </div>

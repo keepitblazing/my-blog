@@ -5,8 +5,8 @@ import PostList from "@/components/post/PostList";
 import ErrorDisplay from "@/components/ErrorDisplay";
 import Spinner from "@/components/Spinner";
 
-export default function Home() {
-  const { posts, loading, error } = usePosts("all");
+export default function DiaryPage() {
+  const { posts, loading, error } = usePosts("diary");
 
   if (loading) {
     return <Spinner />;
@@ -19,11 +19,11 @@ export default function Home() {
   return (
     <PostList
       posts={posts}
-      title="전체 글"
-      category="all"
+      title="일기"
+      category="diary"
       emptyMessage={{
         title: "아직 작성된 글이 없습니다",
-        description: "첫 번째 글을 작성해보세요!",
+        description: "첫 번째 일기를 작성해보세요!",
       }}
     />
   );
