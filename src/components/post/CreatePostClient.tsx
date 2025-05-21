@@ -92,7 +92,7 @@ export default function CreatePostClient() {
   return (
     <div className="max-w-7xl mx-auto py-8 space-y-6">
       <Link
-        href="/post"
+        href="/"
         className="inline-flex items-center gap-2 px-4 py-2 text-white rounded-lg hover:bg-[#2a2a2f] transition-colors w-fit"
       >
         <FontAwesomeIcon icon={faArrowLeft} />
