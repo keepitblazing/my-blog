@@ -3,7 +3,7 @@ import { Post } from "@/types/post";
 
 export async function getPosts() {
   const { data, error } = await supabase
-    .from("post")
+    .from("Post")
     .select("*")
     .order("created_at", { ascending: false });
 
@@ -17,7 +17,7 @@ export async function getPosts() {
 
 export async function getPostById(id: string) {
   const { data, error } = await supabase
-    .from("post")
+    .from("Post")
     .select("*")
     .eq("id", id)
     .single();
@@ -32,7 +32,7 @@ export async function getPostById(id: string) {
 
 export async function createPost(post: Omit<Post, "id" | "created_at">) {
   const { data, error } = await supabase
-    .from("post")
+    .from("Post")
     .insert([post])
     .select()
     .single();
@@ -47,7 +47,7 @@ export async function createPost(post: Omit<Post, "id" | "created_at">) {
 
 export async function updatePost(id: string, post: Partial<Post>) {
   const { data, error } = await supabase
-    .from("post")
+    .from("Post")
     .update(post)
     .eq("id", id)
     .select()
@@ -62,7 +62,7 @@ export async function updatePost(id: string, post: Partial<Post>) {
 }
 
 export async function deletePost(id: string) {
-  const { error } = await supabase.from("post").delete().eq("id", id);
+  const { error } = await supabase.from("Post").delete().eq("id", id);
 
   if (error) {
     console.error("Error deleting post:", error);
