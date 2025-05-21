@@ -154,6 +154,14 @@ export default function EditPostClient({ id }: { id: string }) {
                 theme="dark"
                 previewStyle="vertical"
                 hideModeSwitch={true}
+                onChange={() => {
+                  if (editorRef.current) {
+                    const newContent = editorRef.current
+                      .getInstance()
+                      .getMarkdown();
+                    setContent(newContent);
+                  }
+                }}
                 toolbarItems={[
                   ["heading", "bold", "italic", "strike"],
                   ["hr", "quote"],
