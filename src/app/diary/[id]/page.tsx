@@ -2,7 +2,7 @@ import PostDetailClient from "@/components/post/PostDetailClient";
 
 type Params = Promise<{ id: string }>;
 
-export default async function PostDetail({ params }: { params: Params }) {
+export default async function DiaryPostPage({ params }: { params: Params }) {
   const { id } = await params;
-  return <PostDetailClient id={id} />;
+  return <PostDetailClient id={id} category="diary" />;
 }

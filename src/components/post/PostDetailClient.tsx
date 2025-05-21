@@ -71,7 +71,15 @@ const components: Components = {
   ),
 };
 
-export default function PostDetailClient({ id }: { id: string }) {
+interface PostDetailClientProps {
+  id: string;
+  category: "dev" | "diary";
+}
+
+export default function PostDetailClient({
+  id,
+  category,
+}: PostDetailClientProps) {
   const router = useRouter();
   const [post, setPost] = useState<Post | null>(null);
   const [loading, setLoading] = useState(true);
@@ -146,64 +154,75 @@ export default function PostDetailClient({ id }: { id: string }) {
           className="inline-flex items-center gap-2 px-4 py-2 text-white bg-[#222225] rounded-lg hover:bg-[#2a2a2f] transition-colors"
         >
           <FontAwesomeIcon icon={faArrowLeft} />
-          목록으로 돌아가기
+          뒤로가기
         </Link>
       </div>
     );
   }
 
   return (
-    <div className="max-w-4xl mx-auto space-y-8 py-8">
-      <Link
-        href="/"
-        className="inline-flex items-center gap-2 px-4 py-2 text-white rounded-lg hover:bg-[#2a2a2f] transition-colors w-fit"
-      >
-        <FontAwesomeIcon icon={faArrowLeft} />
-        목록으로 돌아가기
-      </Link>
-
-      <article className="border-2 border-[#222225] p-8 rounded-lg">
-        <div className="flex items-center justify-between mb-4">
-          <h1 className="text-3xl font-bold text-gray-100 line-clamp-1">
-            {post.title}
-          </h1>
-          {isAdmin && (
-            <div className="flex gap-2">
-              <Link
-                href={`/post/${post.id}/edit`}
-                className="inline-flex items-center gap-2 px-4 py-1 text-white bg-[#222225] rounded-lg hover:bg-[#2a2a2f] transition-colors"
-              >
-                <FontAwesomeIcon icon={faEdit} />
-                수정
-              </Link>
-              <button
-                onClick={handleDelete}
-                disabled={isDeleting}
-                className={`inline-flex items-center gap-2 px-4 text-white bg-red-600 rounded-lg hover:bg-red-700 transition-colors ${
-                  isDeleting ? "opacity-50 cursor-not-allowed" : ""
-                }`}
-              >
-                <FontAwesomeIcon icon={faTrash} />
-                {isDeleting ? "삭제 중..." : "삭제"}
-              </button>
-            </div>
-          )}
-        </div>
-        <div className="text-sm text-gray-400 mb-8 border-b border-[#222225] pb-4 text-right">
-          <span className="hidden sm:inline">
-            {formatDateDesktop(post.created_at)}
-          </span>
-          <span className="sm:hidden">{formatDateMobile(post.created_at)}</span>
-        </div>
-        <div className="markdown-body prose prose-invert max-w-none text-gray-200 leading-relaxed">
-          <ReactMarkdown
-            remarkPlugins={[remarkGfm, remarkBreaks]}
-            components={components}
+    <div className="flex flex-col min-h-[calc(100vh-4rem)]">
+      <div className="max-w-4xl mx-auto w-full px-4 py-4 sm:py-8">
+        <div className="mb-4">
+          <Link
+            href={`/${category}`}
+            className="inline-flex items-center justify-start gap-2 px-2 sm:px-4 py-2 text-white rounded-lg hover:bg-[#2a2a2f] transition-colors"
+            title="뒤로가기"
           >
-            {post.content}
-          </ReactMarkdown>
+            <FontAwesomeIcon icon={faArrowLeft} className="text-lg" />
+            <span className="hidden sm:inline">뒤로가기</span>
+          </Link>
         </div>
-      </article>
+
+        <article className="border-2 border-[#222225] p-4 sm:p-6 md:p-8 rounded-lg h-full">
+          <div className="flex items-center justify-between mb-4">
+            <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-100 line-clamp-1">
+              {post.title}
+            </h1>
+            {isAdmin && (
+              <div className="flex gap-2">
+                <Link
+                  href={`/post/${post.id}/edit`}
+                  className="inline-flex items-center justify-center sm:justify-start gap-2 px-2 sm:px-4 py-1 text-sm sm:text-base text-white bg-[#222225] rounded-lg hover:bg-[#2a2a2f] transition-colors min-w-[2.5rem] sm:min-w-0"
+                  title="수정"
+                >
+                  <FontAwesomeIcon icon={faEdit} />
+                  <span className="hidden sm:inline">수정</span>
+                </Link>
+                <button
+                  onClick={handleDelete}
+                  disabled={isDeleting}
+                  className={`inline-flex items-center justify-center sm:justify-start gap-2 px-2 sm:px-4 text-sm sm:text-base text-white bg-red-600 rounded-lg hover:bg-red-700 transition-colors min-w-[2.5rem] sm:min-w-0 ${
+                    isDeleting ? "opacity-50 cursor-not-allowed" : ""
+                  }`}
+                  title="삭제"
+                >
+                  <FontAwesomeIcon icon={faTrash} />
+                  <span className="hidden sm:inline">
+                    {isDeleting ? "삭제 중..." : "삭제"}
+                  </span>
+                </button>
+              </div>
+            )}
+          </div>
+          <div className="text-xs sm:text-sm text-gray-400 mb-6 sm:mb-8 border-b border-[#222225] pb-3 sm:pb-4 text-right">
+            <span className="hidden sm:inline">
+              {formatDateDesktop(post.created_at)}
+            </span>
+            <span className="sm:hidden">
+              {formatDateMobile(post.created_at)}
+            </span>
+          </div>
+          <div className="markdown-body prose prose-invert max-w-none text-sm sm:text-base md:text-lg text-gray-200 leading-relaxed prose-headings:text-xl sm:prose-headings:text-2xl md:prose-headings:text-3xl prose-p:text-sm sm:prose-p:text-base md:prose-p:text-lg prose-li:text-sm sm:prose-li:text-base md:prose-li:text-lg prose-code:text-xs sm:prose-code:text-sm md:prose-code:text-base">
+            <ReactMarkdown
+              remarkPlugins={[remarkGfm, remarkBreaks]}
+              components={components}
+            >
+              {post.content}
+            </ReactMarkdown>
+          </div>
+        </article>
+      </div>
     </div>
   );
 }
