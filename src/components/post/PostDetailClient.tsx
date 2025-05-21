@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Post } from "@/types/post";
-import { formatDate } from "@/lib/utils";
+import { formatDateMobile, formatDateDesktop } from "@/lib/utils";
 import { getPostById, deletePost } from "@/lib/supabase/post";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -79,22 +79,6 @@ export default function PostDetailClient({ id }: { id: string }) {
   const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
-    if (!id) {
-      setLoading(false);
-      return;
-    }
-
-    const checkAdmin = async () => {
-      try {
-        const response = await fetch("/api/check-admin");
-        const data = await response.json();
-        setIsAdmin(data.isAdmin);
-      } catch (error) {
-        console.error("Admin check error:", error);
-        setIsAdmin(false);
-      }
-    };
-
     const fetchPost = async () => {
       try {
         const data = await getPostById(id);
@@ -106,9 +90,27 @@ export default function PostDetailClient({ id }: { id: string }) {
       }
     };
 
-    checkAdmin();
-    fetchPost();
+    if (id) {
+      fetchPost();
+    } else {
+      setLoading(false);
+    }
   }, [id]);
+
+  useEffect(() => {
+    const checkAdmin = async () => {
+      try {
+        const response = await fetch("/api/check-admin");
+        const data = await response.json();
+        setIsAdmin(data.isAdmin);
+      } catch (error) {
+        console.error("Admin check error:", error);
+        setIsAdmin(false);
+      }
+    };
+
+    checkAdmin();
+  }, []);
 
   const handleDelete = async () => {
     if (!id) return;
@@ -162,7 +164,9 @@ export default function PostDetailClient({ id }: { id: string }) {
 
       <article className="border-2 border-[#222225] p-8 rounded-lg">
         <div className="flex items-center justify-between mb-4">
-          <h1 className="text-3xl font-bold text-gray-100">{post.title}</h1>
+          <h1 className="text-3xl font-bold text-gray-100 line-clamp-1">
+            {post.title}
+          </h1>
           {isAdmin && (
             <div className="flex gap-2">
               <Link
@@ -186,7 +190,10 @@ export default function PostDetailClient({ id }: { id: string }) {
           )}
         </div>
         <div className="text-sm text-gray-400 mb-8 border-b border-[#222225] pb-4 text-right">
-          {formatDate(post.created_at)}
+          <span className="hidden sm:inline">
+            {formatDateDesktop(post.created_at)}
+          </span>
+          <span className="sm:hidden">{formatDateMobile(post.created_at)}</span>
         </div>
         <div className="markdown-body prose prose-invert max-w-none text-gray-200 leading-relaxed">
           <ReactMarkdown

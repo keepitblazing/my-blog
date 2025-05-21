@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { Post } from "@/types/post";
-import { formatDate } from "@/lib/utils";
+import { formatDateMobile, formatDateDesktop } from "@/lib/utils";
 import { useEffect, useState } from "react";
 import { getPosts } from "@/lib/supabase/post";
 import Spinner from "@/components/Spinner";
@@ -56,9 +56,16 @@ export default function Home() {
             >
               <Link href={`/post/${post.id}`}>
                 <div className="flex items-center justify-between pt-2 pb-5">
-                  <h2 className="text-xl font-semibold mb-2">{post.title}</h2>
+                  <h2 className="text-xl font-semibold mb-2 line-clamp-1">
+                    {post.title}
+                  </h2>
                   <div className="text-sm mb-4">
-                    {formatDate(post.created_at)}
+                    <span className="hidden sm:inline">
+                      {formatDateDesktop(post.created_at)}
+                    </span>
+                    <span className="sm:hidden">
+                      {formatDateMobile(post.created_at)}
+                    </span>
                   </div>
                 </div>
                 <p className="line-clamp-2">{post.content}</p>
