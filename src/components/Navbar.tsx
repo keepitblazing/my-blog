@@ -119,9 +119,9 @@ export default function Navbar() {
                 </Link>
                 {isAdmin && (
                   <Link
-                    href="/write"
+                    href="/post/create"
                     className={`inline-flex items-center px-1 pt-1 border-b-3 text-sm font-medium ${
-                      pathname === "/write"
+                      pathname === "/post/create"
                         ? "border-[#222225] text-white"
                         : "border-transparent text-gray-400 hover:border-[#222225] hover:text-white"
                     }`}
@@ -195,9 +195,9 @@ export default function Navbar() {
             </Link>
             {isAdmin && (
               <Link
-                href="/write"
+                href="/post/create"
                 className={`block px-3 py-2 text-base font-medium transition-colors duration-200 rounded-md ${
-                  pathname === "/write"
+                  pathname === "/post/create"
                     ? "bg-[#1a1a1a] text-white"
                     : "text-gray-400 hover:bg-[#1a1a1a] hover:text-white"
                 }`}

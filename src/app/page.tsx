@@ -6,6 +6,13 @@ import { formatDate } from "@/lib/utils";
 import { useEffect, useState } from "react";
 import { getPosts } from "@/lib/supabase/post";
 import Spinner from "@/components/Spinner";
+import dayjs from "dayjs";
+import timezone from "dayjs/plugin/timezone";
+import utc from "dayjs/plugin/utc";
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
+dayjs.tz.setDefault("Asia/Seoul");
 
 export default function Home() {
   const [posts, setPosts] = useState<Post[]>([]);
