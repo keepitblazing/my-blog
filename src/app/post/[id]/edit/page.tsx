@@ -1,7 +1,8 @@
-import { use } from "react";
 import EditPostClient from "@/components/post/EditPostClient";
 
-export default function EditPost({ params }: { params: { id: string } }) {
-  const resolvedParams = use(Promise.resolve(params));
-  return <EditPostClient id={resolvedParams.id} />;
+type Params = Promise<{ id: string }>;
+
+export default async function EditPost({ params }: { params: Params }) {
+  const { id } = await params;
+  return <EditPostClient id={id} />;
 }
