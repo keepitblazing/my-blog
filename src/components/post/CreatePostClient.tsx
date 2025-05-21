@@ -10,57 +10,6 @@ import type { Editor as ToastEditorType } from "@toast-ui/react-editor";
 import "@toast-ui/editor/dist/toastui-editor.css";
 import "@toast-ui/editor/dist/theme/toastui-editor-dark.css";
 import { createPost } from "@/lib/supabase/post";
-import dayjs from "dayjs";
-import timezone from "dayjs/plugin/timezone";
-import utc from "dayjs/plugin/utc";
-
-dayjs.extend(utc);
-dayjs.extend(timezone);
-dayjs.tz.setDefault("Asia/Seoul");
-
-// 커스텀 스타일 추가
-const editorStyle = `
-  .toastui-editor-defaultUI {
-    background-color: #000 !important;
-    border: 1px solid #222225 !important;
-  }
-  .toastui-editor-defaultUI-toolbar {
-    background-color: #000 !important;
-    border-bottom: 1px solid #222225 !important;
-  }
-  .toastui-editor-md-container {
-    background-color: #000 !important;
-    border-right: 1px solid #222225 !important;
-  }
-  .toastui-editor-md-container .ProseMirror {
-    background-color: #000 !important;
-    color: #fff !important;
-  }
-  .toastui-editor-md-container .ProseMirror p {
-    color: #fff !important;
-  }
-  .toastui-editor-defaultUI button {
-    border-color: #222225 !important;
-  }
-  .toastui-editor-defaultUI .toastui-editor-toolbar-icons {
-    border-color: #222225 !important;
-  }
-  .toastui-editor-defaultUI .toastui-editor-toolbar-group {
-    border-color: #222225 !important;
-  }
-  .toastui-editor-popup {
-    border: 1px solid #222225 !important;
-  }
-  .toastui-editor-popup-body {
-    border-top: 1px solid #222225 !important;
-  }
-  .toastui-editor-popup-body input {
-    border: 1px solid #222225 !important;
-  }
-  .toastui-editor-popup-body button {
-    border: 1px solid #222225 !important;
-  }
-`;
 
 const ToastEditor = dynamic(
   () => import("@toast-ui/react-editor").then((mod) => mod.Editor),
@@ -74,7 +23,7 @@ const ToastEditor = dynamic(
   }
 );
 
-export default function Write() {
+export default function CreatePostClient() {
   const router = useRouter();
   const editorRef = useRef<ToastEditorType>(null);
   const [title, setTitle] = useState("");
@@ -129,7 +78,6 @@ export default function Write() {
         content,
       });
 
-      // 성공 시 새로 생성된 포스트의 상세 페이지로 이동
       router.push(`/post/${newPost.id}`);
     } catch (err) {
       console.error("Error creating post:", err);
@@ -143,7 +91,6 @@ export default function Write() {
 
   return (
     <div className="max-w-7xl mx-auto py-8 space-y-6">
-      <style>{editorStyle}</style>
       <Link
         href="/post"
         className="inline-flex items-center gap-2 px-4 py-2 text-white rounded-lg hover:bg-[#2a2a2f] transition-colors w-fit"
