@@ -9,7 +9,6 @@ import { faLock } from "@fortawesome/free-solid-svg-icons";
 interface PostListProps {
   posts: Post[];
   title: string;
-  category: "dev" | "diary" | "all";
   emptyMessage: {
     title: string;
     description: string;
@@ -19,7 +18,6 @@ interface PostListProps {
 export default function PostList({
   posts,
   title,
-  category,
   emptyMessage,
 }: PostListProps) {
   return (
@@ -37,7 +35,7 @@ export default function PostList({
               key={post.id}
               className="border-2 border-[#222225] p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow"
             >
-              <Link href={`/${category}/${post.id}`}>
+              <Link href={`/${post.category}/${post.id}`}>
                 <div className="flex items-center justify-between pt-2 pb-5">
                   <div className="flex items-center gap-2">
                     {post.is_private && (
