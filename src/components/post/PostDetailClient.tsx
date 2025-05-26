@@ -107,7 +107,7 @@ export default function PostDetailClient({
 
   return (
     <div className="flex flex-col min-h-[calc(100vh-4rem)]">
-      <div className="max-w-4xl mx-auto w-full px-4 py-4 sm:py-8">
+      <div className="max-w-7xl mx-auto w-full p-[7px]">
         <div className="mb-4">
           <Link
             href={`/${category}`}
@@ -115,7 +115,7 @@ export default function PostDetailClient({
             title="뒤로가기"
           >
             <FontAwesomeIcon icon={faArrowLeft} className="text-lg" />
-            <span className="hidden sm:inline">뒤로가기</span>
+            <span>뒤로가기</span>
           </Link>
         </div>
 
