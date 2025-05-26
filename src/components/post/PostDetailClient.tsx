@@ -12,64 +12,9 @@ import {
   faEdit,
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
-import remarkBreaks from "remark-breaks";
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
-import type { Components } from "react-markdown";
 import Spinner from "@/components/Spinner";
-
-const components: Components = {
-  code({ className, children, ...props }) {
-    const match = /language-(\w+)/.exec(className || "");
-    const language = match ? match[1] : "";
-
-    if (language) {
-      return (
-        <div className="relative">
-          <SyntaxHighlighter
-            language={language}
-            style={vscDarkPlus}
-            customStyle={{
-              margin: 0,
-              borderRadius: "0.5rem",
-              padding: "1rem",
-            }}
-          >
-            {String(children).replace(/\n$/, "")}
-          </SyntaxHighlighter>
-        </div>
-      );
-    }
-
-    return (
-      <code className="bg-[#1a1a1d] px-1.5 py-0.5 rounded text-sm" {...props}>
-        {children}
-      </code>
-    );
-  },
-  // 링크 스타일
-  a: ({ ...props }) => (
-    <a className="text-blue-400 hover:underline" {...props} />
-  ),
-  // 인용구 스타일
-  blockquote: ({ ...props }) => (
-    <blockquote className="border-l-4 border-gray-600 pl-4 italic" {...props} />
-  ),
-  // 테이블 스타일
-  table: ({ ...props }) => (
-    <div className="overflow-x-auto">
-      <table className="min-w-full divide-y divide-gray-700" {...props} />
-    </div>
-  ),
-  th: ({ ...props }) => (
-    <th className="px-4 py-2 bg-[#1a1a1d] text-left" {...props} />
-  ),
-  td: ({ ...props }) => (
-    <td className="px-4 py-2 border-t border-gray-700" {...props} />
-  ),
-};
+import "@toast-ui/editor/dist/toastui-editor-viewer.css";
+import { Viewer } from "@toast-ui/react-editor";
 
 interface PostDetailClientProps {
   id: string;
@@ -213,13 +158,8 @@ export default function PostDetailClient({
               {formatDateMobile(post.created_at)}
             </span>
           </div>
-          <div className="markdown-body prose prose-invert max-w-none text-sm sm:text-base md:text-lg text-gray-200 leading-relaxed prose-headings:text-xl sm:prose-headings:text-2xl md:prose-headings:text-3xl prose-p:text-sm sm:prose-p:text-base md:prose-p:text-lg prose-li:text-sm sm:prose-li:text-base md:prose-li:text-lg prose-code:text-xs sm:prose-code:text-sm md:prose-code:text-base">
-            <ReactMarkdown
-              remarkPlugins={[remarkGfm, remarkBreaks]}
-              components={components}
-            >
-              {post.content}
-            </ReactMarkdown>
+          <div className="prose prose-invert max-w-none text-gray-200">
+            <Viewer initialValue={post.content} />
           </div>
         </article>
       </div>
