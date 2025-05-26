@@ -20,7 +20,6 @@ export default function DevPage() {
     <PostList
       posts={posts}
       title="개발"
-      category="dev"
       emptyMessage={{
         title: "아직 작성된 글이 없습니다",
         description: "첫 번째 개발 글을 작성해보세요!",

@@ -20,7 +20,6 @@ export default function DiaryPage() {
     <PostList
       posts={posts}
       title="일기"
-      category="diary"
       emptyMessage={{
         title: "아직 작성된 글이 없습니다",
         description: "첫 번째 일기를 작성해보세요!",

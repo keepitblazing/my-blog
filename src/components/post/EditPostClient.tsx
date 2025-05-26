@@ -10,6 +10,7 @@ import type { Editor as ToastEditorType } from "@toast-ui/react-editor";
 import { getPostById, updatePost } from "@/lib/supabase/post";
 import "@toast-ui/editor/dist/toastui-editor.css";
 import "@toast-ui/editor/dist/theme/toastui-editor-dark.css";
+import { Post } from "@/types/post";
 
 const ToastEditor = dynamic(
   () => import("@toast-ui/react-editor").then((mod) => mod.Editor),
@@ -26,8 +27,15 @@ const ToastEditor = dynamic(
 export default function EditPostClient({ id }: { id: string }) {
   const router = useRouter();
   const editorRef = useRef<ToastEditorType>(null);
-  const [content, setContent] = useState("");
-  const [title, setTitle] = useState("");
+  const [post, setPost] = useState<Post>({
+    id: "",
+    title: "",
+    content: "",
+    category: "dev",
+    created_at: "",
+    updated_at: "",
+    is_private: false,
+  });
   const [isEditorReady, setIsEditorReady] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState("");
@@ -53,8 +61,8 @@ export default function EditPostClient({ id }: { id: string }) {
     const fetchPost = async () => {
       try {
         const post = await getPostById(id);
-        setTitle(post.title);
-        setContent(post.content);
+        setPost(post);
+
         if (editorRef.current) {
           editorRef.current.getInstance().setMarkdown(post.content);
         }
@@ -79,12 +87,12 @@ export default function EditPostClient({ id }: { id: string }) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!title.trim()) {
+    if (!post?.title.trim()) {
       setError("제목을 입력해주세요.");
       return;
     }
 
-    if (!content.trim()) {
+    if (!post.content.trim()) {
       setError("내용을 입력해주세요.");
       return;
     }
@@ -94,10 +102,10 @@ export default function EditPostClient({ id }: { id: string }) {
 
     try {
       await updatePost(id, {
-        title: title.trim(),
-        content,
+        title: post.title.trim(),
+        content: post.content.trim(),
       });
-      router.push(`/post/${id}`);
+      router.push(`/${post.category}/${id}`);
     } catch (err) {
       console.error("Error updating post:", err);
       setError("글 수정에 실패했습니다.");
@@ -120,7 +128,7 @@ export default function EditPostClient({ id }: { id: string }) {
   return (
     <div className="max-w-7xl mx-auto py-8 space-y-6">
       <Link
-        href={`/post/${id}`}
+        href={`/${post?.category}/${id}`}
         className="inline-flex items-center gap-2 px-4 py-2 text-white rounded-lg hover:bg-[#2a2a2f] transition-colors w-fit"
       >
         <FontAwesomeIcon icon={faArrowLeft} />글 보기로 돌아가기
@@ -137,8 +145,10 @@ export default function EditPostClient({ id }: { id: string }) {
         <div className="w-full flex flex-col border border-[#222225] rounded-lg p-6">
           <input
             type="text"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
+            value={post?.title}
+            onChange={(e) =>
+              setPost((prev) => ({ ...prev, title: e.target.value }))
+            }
             placeholder="제목을 입력하세요"
             className="mb-4 text-xl font-bold text-white bg-transparent focus:ring-0 focus:outline-none rounded-lg p-2 border border-[#222225]"
             disabled={isSubmitting}
@@ -150,16 +160,16 @@ export default function EditPostClient({ id }: { id: string }) {
                 height="100%"
                 initialEditType="markdown"
                 useCommandShortcut={true}
-                initialValue={content}
+                initialValue={post.content}
                 theme="dark"
                 previewStyle="vertical"
                 hideModeSwitch={true}
                 onChange={() => {
                   if (editorRef.current) {
-                    const newContent = editorRef.current
+                    const newPost = editorRef.current
                       .getInstance()
                       .getMarkdown();
-                    setContent(newContent);
+                    setPost((prev) => ({ ...prev, content: newPost }));
                   }
                 }}
                 toolbarItems={[
