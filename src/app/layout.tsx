@@ -22,6 +22,7 @@ export default function RootLayout({
     <html lang="ko">
       <head>
         <meta property="og:title" content="Keep it blazing🔥" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta
           property="og:description"
           content="개발 관련 글을 작성하고 공유하는 블로그입니다."
