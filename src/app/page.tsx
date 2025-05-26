@@ -20,7 +20,6 @@ export default function Home() {
     <PostList
       posts={posts}
       title="전체 글"
-      category="all"
       emptyMessage={{
         title: "아직 작성된 글이 없습니다",
         description: "첫 번째 글을 작성해보세요!",

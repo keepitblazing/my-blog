@@ -5,11 +5,14 @@ import { Post } from "@/types/post";
 import { formatDateMobile, formatDateDesktop } from "@/lib/utils";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLock } from "@fortawesome/free-solid-svg-icons";
+import dynamic from "next/dynamic";
+const PostContentViewer = dynamic(() => import("./PostContentViewer"), {
+  ssr: false,
+});
 
 interface PostListProps {
   posts: Post[];
   title: string;
-  category: "dev" | "diary" | "all";
   emptyMessage: {
     title: string;
     description: string;
@@ -19,7 +22,6 @@ interface PostListProps {
 export default function PostList({
   posts,
   title,
-  category,
   emptyMessage,
 }: PostListProps) {
   return (
@@ -35,9 +37,10 @@ export default function PostList({
           {posts.map((post) => (
             <article
               key={post.id}
-              className="border-2 border-[#222225] p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow"
+              className="border-2 border-[#222225] p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow
+      max-h-[150px] overflow-hidden"
             >
-              <Link href={`/${category}/${post.id}`}>
+              <Link href={`/${post.category}/${post.id}`}>
                 <div className="flex items-center justify-between pt-2 pb-5">
                   <div className="flex items-center gap-2">
                     {post.is_private && (
@@ -60,7 +63,7 @@ export default function PostList({
                     </span>
                   </div>
                 </div>
-                <p className="line-clamp-2">{post.content}</p>
+                <PostContentViewer content={post.content} />
               </Link>
             </article>
           ))}
