@@ -11,6 +11,14 @@ import { getPostById, updatePost } from "@/lib/supabase/post";
 import "@toast-ui/editor/dist/toastui-editor.css";
 import "@toast-ui/editor/dist/theme/toastui-editor-dark.css";
 import { Post } from "@/types/post";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
 const ToastEditor = dynamic(
   () => import("@toast-ui/react-editor").then((mod) => mod.Editor),
@@ -143,16 +151,81 @@ export default function EditPostClient({ id }: { id: string }) {
       <form onSubmit={handleSubmit} className="flex gap-6 h-[80vh]">
         {/* 에디터 */}
         <div className="w-full flex flex-col border border-[#222225] rounded-lg p-6">
-          <input
-            type="text"
-            value={post?.title}
-            onChange={(e) =>
-              setPost((prev) => ({ ...prev, title: e.target.value }))
-            }
-            placeholder="제목을 입력하세요"
-            className="mb-4 text-xl font-bold text-white bg-transparent focus:ring-0 focus:outline-none rounded-lg p-2 border border-[#222225]"
-            disabled={isSubmitting}
-          />
+          <div className="flex flex-col gap-4 mb-4">
+            <div className="flex gap-4 h-12">
+              <Select
+                value={post.category}
+                onValueChange={(value: "dev" | "diary") =>
+                  setPost((prev) => ({
+                    ...prev,
+                    catogory: value,
+                  }))
+                }
+                disabled={isSubmitting}
+              >
+                <SelectTrigger className="w-[180px] h-12 bg-transparent border-[#222225] text-white hover:bg-[#000] hover:text-white rounded-lg px-3">
+                  <SelectValue placeholder="카테고리 선택" />
+                </SelectTrigger>
+                <SelectContent className="bg-[#000] border-[#222225] text-white">
+                  <SelectItem
+                    value="dev"
+                    className="hover:bg-[#222225] focus:bg-[#222225] text-white"
+                  >
+                    개발
+                  </SelectItem>
+                  <SelectItem
+                    value="diary"
+                    className="hover:bg-[#222225] focus:bg-[#222225] text-white"
+                  >
+                    일기
+                  </SelectItem>
+                </SelectContent>
+              </Select>
+              <input
+                type="text"
+                value={post?.title}
+                onChange={(e) =>
+                  setPost((prev) => ({ ...prev, title: e.target.value }))
+                }
+                placeholder="제목을 입력하세요"
+                className="flex-1 h-12 text-xl font-bold text-white bg-transparent focus:ring-0 focus:outline-none rounded-lg px-3 border border-[#222225]"
+                disabled={isSubmitting}
+              />
+            </div>
+            <div className="flex items-center gap-4">
+              <RadioGroup
+                value={post.is_private ? "private" : "public"}
+                onValueChange={(value) =>
+                  setPost((prev) => ({
+                    ...prev,
+                    is_private: value === "private",
+                  }))
+                }
+                className="flex items-center gap-4"
+              >
+                <div className="flex items-center gap-2">
+                  <RadioGroupItem
+                    value="public"
+                    id="public"
+                    className="border-[#222225] text-white"
+                  />
+                  <label htmlFor="public" className="text-sm text-white">
+                    공개글
+                  </label>
+                </div>
+                <div className="flex items-center gap-2">
+                  <RadioGroupItem
+                    value="private"
+                    id="private"
+                    className="border-[#222225] text-white"
+                  />
+                  <label htmlFor="private" className="text-sm text-white">
+                    비밀글
+                  </label>
+                </div>
+              </RadioGroup>
+            </div>
+          </div>
           <div className="flex-1 min-h-0 overflow-hidden h-full">
             {isEditorReady && (
               <ToastEditor
