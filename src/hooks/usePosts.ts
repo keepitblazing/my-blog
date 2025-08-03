@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { PostWithTags } from "@/types/post";
-import { getPosts, getPostsByCategoryAndTags } from "@/lib/supabase/post";
+import { getPosts } from "@/lib/supabase/post";
 
 type Category = "all" | "dev" | "diary";
 

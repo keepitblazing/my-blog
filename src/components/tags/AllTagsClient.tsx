@@ -6,7 +6,7 @@ import { getTagsWithCount } from "@/lib/supabase/tags";
 import Link from "next/link";
 import { TagGridSkeleton } from "@/components/skeleton/TagSkeleton";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft, faTag } from "@fortawesome/free-solid-svg-icons";
+import { faTag } from "@fortawesome/free-solid-svg-icons";
 
 export default function AllTagsClient() {
   const [tags, setTags] = useState<TagWithCount[]>([]);
