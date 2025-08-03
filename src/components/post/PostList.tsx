@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { Post } from "@/types/post";
+import { PostWithTags } from "@/types/post";
+import TagBadge from "@/components/tags/TagBadge";
 import { formatDateMobile, formatDateDesktop } from "@/lib/utils";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLock } from "@fortawesome/free-solid-svg-icons";
@@ -11,7 +12,7 @@ const PostContentViewer = dynamic(() => import("./PostContentViewer"), {
 });
 
 interface PostListProps {
-  posts: Post[];
+  posts: PostWithTags[];
   title: string;
   emptyMessage: {
     title: string;
@@ -64,6 +65,13 @@ export default function PostList({
                   </div>
                 </div>
                 <PostContentViewer content={post.content} />
+                {post.tags && post.tags.length > 0 && (
+                  <div className="flex flex-wrap gap-2 mt-3">
+                    {post.tags.map((tag) => (
+                      <TagBadge key={tag.id} tag={tag} size="sm" />
+                    ))}
+                  </div>
+                )}
               </Link>
             </article>
           ))}

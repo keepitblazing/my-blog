@@ -3,8 +3,29 @@
 
 @custom-variant dark (&:is(.dark *));
 
-:root {
-  --border-color: #222225;
+@theme {
+  /* Blog 색상 시스템 */
+  /* 기본 색상 (4가지만 사용) */
+  --color-blog-black: #000000;
+  --color-blog-white: #ffffff;
+  --color-blog-text: #e5e5e7; /* 밝은 회색 텍스트 */
+  --color-blog-grey: #222225; /* 회색 (버튼, 테두리 등) */
+
+  /* 파생 색상 (기본 색상에서 파생) */
+  --color-blog-grey-hover: #2a2a2f; /* 호버 상태 */
+  --color-blog-border: var(--color-blog-grey); /* 테두리 */
+  --color-blog-skeleton: #1a1a1d; /* 스켈레톤 배경 (더 어두운 회색) */
+
+  /* 의미론적 색상 */
+  --color-blog-danger: #dc2626; /* 삭제 버튼 등 위험 액션 */
+  --color-blog-danger-hover: #b91c1c;
+
+  /* 투명도 변형 */
+  --color-blog-text-muted: rgba(229, 229, 231, 0.6); /* 60% 투명도 */
+  --color-blog-text-faint: rgba(229, 229, 231, 0.4); /* 40% 투명도 */
+
+  /* 기존 변수들 */
+  --color-border-color: #222225;
   --radius: 0.625rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
@@ -77,6 +98,12 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+}
+
+/* 다크 테마 기본값 (현재 다크 테마만 사용) */
+body {
+  background-color: var(--blog-black);
+  color: var(--blog-text);
 }
 
 @keyframes shake {
@@ -187,6 +214,11 @@
   left: 0;
   animation: flame3 1.3s ease-in-out infinite;
   opacity: 0.9;
+}
+
+body {
+  background-color: var(--color-blog-black);
+  color: var(--color-blog-text);
 }
 
 /* Toast Editor 스타일 */
