@@ -175,7 +175,6 @@ export async function updatePost(
   post: Partial<Post>,
   tagIds?: string[]
 ): Promise<PostWithTags> {
-  // Update the post
   const { error } = await supabase
     .from("post")
     .update(post)
