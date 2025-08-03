@@ -2,15 +2,15 @@
 
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
 import dynamic from "next/dynamic";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import type { Editor as ToastEditorType } from "@toast-ui/react-editor";
 import { getPostById, updatePost } from "@/lib/supabase/post";
 import "@toast-ui/editor/dist/toastui-editor.css";
 import "@toast-ui/editor/dist/theme/toastui-editor-dark.css";
-import { Post } from "@/types/post";
+import { PostWithTags } from "@/types/post";
+import { Tag } from "@/types/tag";
+import TagInput from "@/components/tags/TagInput";
+import MobileBackButton from "@/components/MobileBackButton";
 import {
   Select,
   SelectContent,
@@ -35,7 +35,7 @@ const ToastEditor = dynamic(
 export default function EditPostClient({ id }: { id: string }) {
   const router = useRouter();
   const editorRef = useRef<ToastEditorType>(null);
-  const [post, setPost] = useState<Post>({
+  const [post, setPost] = useState<PostWithTags>({
     id: "",
     title: "",
     content: "",
@@ -43,7 +43,9 @@ export default function EditPostClient({ id }: { id: string }) {
     created_at: "",
     updated_at: "",
     is_private: false,
+    tags: [],
   });
+  const [selectedTags, setSelectedTags] = useState<Tag[]>([]);
   const [isEditorReady, setIsEditorReady] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState("");
@@ -68,11 +70,16 @@ export default function EditPostClient({ id }: { id: string }) {
 
     const fetchPost = async () => {
       try {
-        const post = await getPostById(id);
-        setPost(post);
+        const fetchedPost = await getPostById(id);
+        if (fetchedPost) {
+          setPost(fetchedPost);
+          setSelectedTags(fetchedPost.tags || []);
 
-        if (editorRef.current) {
-          editorRef.current.getInstance().setMarkdown(post.content);
+          if (editorRef.current) {
+            editorRef.current.getInstance().setMarkdown(fetchedPost.content);
+          }
+        } else {
+          setError("글을 찾을 수 없습니다.");
         }
       } catch (error) {
         console.error("Error fetching post:", error);
@@ -109,10 +116,16 @@ export default function EditPostClient({ id }: { id: string }) {
     setError("");
 
     try {
-      await updatePost(id, {
-        title: post.title.trim(),
-        content: post.content.trim(),
-      });
+      await updatePost(
+        id,
+        {
+          title: post.title.trim(),
+          content: post.content.trim(),
+          category: post.category,
+          is_private: post.is_private,
+        },
+        selectedTags.map((tag) => tag.id)
+      );
       router.push(`/${post.category}/${id}`);
     } catch (err) {
       console.error("Error updating post:", err);
@@ -124,23 +137,19 @@ export default function EditPostClient({ id }: { id: string }) {
 
   if (isLoading) {
     return (
-      <div className="max-w-7xl mx-auto py-8">
+      <div className="max-w-7xl mx-auto py-8 px-4">
         <div className="animate-pulse">
-          <div className="h-8 bg-gray-800 rounded w-3/4 mb-4"></div>
-          <div className="h-96 bg-gray-800 rounded"></div>
+          <div className="h-8 bg-blog-grey  rounded w-3/4 mb-4"></div>
+          <div className="h-96 bg-blog-grey  rounded"></div>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="max-w-7xl mx-auto py-8 space-y-6">
-      <Link
-        href={`/${post?.category}/${id}`}
-        className="inline-flex items-center gap-2 px-4 py-2 text-white rounded-lg hover:bg-[#2a2a2f] transition-colors w-fit"
-      >
-        <FontAwesomeIcon icon={faArrowLeft} />글 보기로 돌아가기
-      </Link>
+    <div className="max-w-7xl mx-auto py-8 px-4 space-y-6">
+      <h1 className="text-xl font-bold">글 수정</h1>
+      <MobileBackButton href={`/${post?.category}/${id}`} label="글 보기로" />
 
       {error && (
         <div className="p-4 bg-red-500/10 border border-red-500/20 rounded-lg text-red-500">
@@ -158,7 +167,7 @@ export default function EditPostClient({ id }: { id: string }) {
                 onValueChange={(value: "dev" | "diary") =>
                   setPost((prev) => ({
                     ...prev,
-                    catogory: value,
+                    category: value,
                   }))
                 }
                 disabled={isSubmitting}
@@ -224,6 +233,13 @@ export default function EditPostClient({ id }: { id: string }) {
                   </label>
                 </div>
               </RadioGroup>
+            </div>
+            <div>
+              <TagInput
+                selectedTags={selectedTags}
+                onTagsChange={setSelectedTags}
+                placeholder="태그를 입력하세요 (Enter로 추가)"
+              />
             </div>
           </div>
           <div className="flex-1 min-h-0 overflow-hidden h-full">

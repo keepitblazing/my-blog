@@ -3,13 +3,17 @@
 import { usePosts } from "@/hooks/usePosts";
 import PostList from "@/components/post/PostList";
 import ErrorDisplay from "@/components/ErrorDisplay";
-import Spinner from "@/components/Spinner";
+import { PostListSkeleton } from "@/components/skeleton/PostSkeleton";
 
 export default function Home() {
   const { posts, loading, error } = usePosts("all");
 
   if (loading) {
-    return <Spinner />;
+    return (
+      <div className="max-w-7xl mx-auto py-8 px-4">
+        <PostListSkeleton />
+      </div>
+    );
   }
 
   if (error) {
@@ -17,13 +21,15 @@ export default function Home() {
   }
 
   return (
-    <PostList
-      posts={posts}
-      title="전체 글"
-      emptyMessage={{
-        title: "아직 작성된 글이 없습니다",
-        description: "첫 번째 글을 작성해보세요!",
-      }}
-    />
+    <div className="max-w-7xl mx-auto py-8 px-4">
+      <PostList
+        posts={posts}
+        title="전체 글"
+        emptyMessage={{
+          title: "아직 작성된 글이 없습니다",
+          description: "첫 번째 글을 작성해보세요!",
+        }}
+      />
+    </div>
   );
 }
