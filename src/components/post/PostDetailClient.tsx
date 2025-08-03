@@ -3,16 +3,18 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { Post } from "@/types/post";
+import { PostWithTags } from "@/types/post";
 import { formatDateMobile, formatDateDesktop } from "@/lib/utils";
 import { getPostById, deletePost } from "@/lib/supabase/post";
+import TagBadge from "@/components/tags/TagBadge";
+import MobileBackButton from "@/components/MobileBackButton";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faArrowLeft,
   faEdit,
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
-import Spinner from "@/components/Spinner";
+import PostDetailSkeleton from "@/components/skeleton/PostDetailSkeleton";
 import "@toast-ui/editor/dist/toastui-editor-viewer.css";
 import { Viewer } from "@toast-ui/react-editor";
 
@@ -26,7 +28,7 @@ export default function PostDetailClient({
   category,
 }: PostDetailClientProps) {
   const router = useRouter();
-  const [post, setPost] = useState<Post | null>(null);
+  const [post, setPost] = useState<PostWithTags | null>(null);
   const [loading, setLoading] = useState(true);
   const [isAdmin, setIsAdmin] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -85,7 +87,7 @@ export default function PostDetailClient({
   };
 
   if (loading) {
-    return <Spinner />;
+    return <PostDetailSkeleton />;
   }
 
   if (!post) {
@@ -108,17 +110,7 @@ export default function PostDetailClient({
   return (
     <div className="flex flex-col min-h-[calc(100vh-4rem)]">
       <div className="max-w-7xl mx-auto w-full p-[7px]">
-        <div className="mb-4">
-          <Link
-            href={`/${category}`}
-            className="inline-flex items-center justify-start gap-2 px-2 sm:px-4 py-2 text-white rounded-lg hover:bg-[#2a2a2f] transition-colors"
-            title="뒤로가기"
-          >
-            <FontAwesomeIcon icon={faArrowLeft} className="text-lg" />
-            <span>뒤로가기</span>
-          </Link>
-        </div>
-
+        <MobileBackButton href={`/${category}`} label="목록으로" />
         <article className="border-2 border-[#222225] p-4 sm:p-6 md:p-8 rounded-lg h-full">
           <div className="flex items-center justify-between mb-4">
             <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-100 line-clamp-1">
@@ -161,6 +153,15 @@ export default function PostDetailClient({
           <div className="prose prose-invert max-w-none text-gray-200">
             <Viewer initialValue={post.content} />
           </div>
+          {post.tags && post.tags.length > 0 && (
+            <div className="mt-8 pt-6 border-t border-[#222225]">
+              <div className="flex flex-wrap gap-2">
+                {post.tags.map((tag) => (
+                  <TagBadge key={tag.id} tag={tag} size="md" />
+                ))}
+              </div>
+            </div>
+          )}
         </article>
       </div>
     </div>

@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
-import { Post } from "@/types/post";
+import { PostWithTags } from "@/types/post";
 import { getPosts } from "@/lib/supabase/post";
 
 type Category = "all" | "dev" | "diary";
 
-export function usePosts(category: Category = "all") {
-  const [posts, setPosts] = useState<Post[]>([]);
+export function usePosts(category: Category = "all", tagSlugs?: string[]) {
+  const [posts, setPosts] = useState<PostWithTags[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
   const [isAdmin, setIsAdmin] = useState(false);
@@ -54,7 +54,7 @@ export function usePosts(category: Category = "all") {
     };
 
     fetchPosts();
-  }, [category, isAdmin]);
+  }, [category, isAdmin, tagSlugs?.join(",")]); // tagSlugs as comma-separated string for dependency
 
   return { posts, loading, error };
 }

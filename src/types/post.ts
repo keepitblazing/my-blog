@@ -1,3 +1,5 @@
+import { Tag } from './tag';
+
 export interface Post {
   id: string;
   title: string;
@@ -7,4 +9,8 @@ export interface Post {
   author?: string;
   category: "dev" | "diary";
   is_private: boolean;
+}
+
+export interface PostWithTags extends Post {
+  tags: Tag[];
 }

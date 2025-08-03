@@ -2,14 +2,13 @@
 
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import dynamic from "next/dynamic";
 import type { Editor as ToastEditorType } from "@toast-ui/react-editor";
 import "@toast-ui/editor/dist/toastui-editor.css";
 import "@toast-ui/editor/dist/theme/toastui-editor-dark.css";
 import { createPost } from "@/lib/supabase/post";
+import { Tag } from "@/types/tag";
+import TagInput from "@/components/tags/TagInput";
 import {
   Select,
   SelectContent,
@@ -37,6 +36,7 @@ export default function CreatePostClient() {
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState<"dev" | "diary">("dev");
   const [isPrivate, setIsPrivate] = useState(false);
+  const [selectedTags, setSelectedTags] = useState<Tag[]>([]);
   const [isEditorReady, setIsEditorReady] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState("");
@@ -83,12 +83,15 @@ export default function CreatePostClient() {
         throw new Error("내용을 입력해주세요.");
       }
 
-      const newPost = await createPost({
-        title: title.trim(),
-        content,
-        category,
-        is_private: isPrivate,
-      });
+      const newPost = await createPost(
+        {
+          title: title.trim(),
+          content,
+          category,
+          is_private: isPrivate,
+        },
+        selectedTags.map((tag) => tag.id)
+      );
 
       router.push(`/${category}/${newPost.id}`);
     } catch (err) {
@@ -102,15 +105,8 @@ export default function CreatePostClient() {
   };
 
   return (
-    <div className="max-w-7xl mx-auto py-8 space-y-6">
-      <Link
-        href="/"
-        className="inline-flex items-center gap-2 px-4 py-2 text-white rounded-lg hover:bg-[#2a2a2f] transition-colors w-fit"
-      >
-        <FontAwesomeIcon icon={faArrowLeft} />
-        뒤로가기
-      </Link>
-
+    <div className="max-w-7xl mx-auto py-8 px-4 space-y-6">
+      <h1 className="text-xl font-bold">글 작성</h1>
       {error && (
         <div className="p-4 bg-red-500/10 border border-red-500/20 rounded-lg text-red-500">
           {error}
@@ -181,6 +177,13 @@ export default function CreatePostClient() {
                   </label>
                 </div>
               </RadioGroup>
+            </div>
+            <div>
+              <TagInput
+                selectedTags={selectedTags}
+                onTagsChange={setSelectedTags}
+                placeholder="태그를 입력하세요 (Enter로 추가)"
+              />
             </div>
           </div>
           <div className="flex-1 min-h-0 overflow-hidden h-full">
