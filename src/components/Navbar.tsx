@@ -17,7 +17,7 @@ const NAV_LINKS: NavLink[] = [
   { href: "/dev", label: "개발" },
   { href: "/diary", label: "일기" },
   { href: "/tags", label: "태그" },
-  { href: "/portfolio", label: "포트폴리오" },
+  { href: "/portfolio", label: "Portfolio" },
   { href: "/post/create", label: "글쓰기", adminOnly: true },
 ];
 
