@@ -3,6 +3,19 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@keyframes pulse-border {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(229, 229, 231, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 4px rgba(229, 229, 231, 0);
+  }
+}
+
+.animate-pulse-border {
+  animation: pulse-border 2s infinite;
+}
+
 @theme {
   /* Blog 색상 시스템 */
   /* 기본 색상 (4가지만 사용) */
