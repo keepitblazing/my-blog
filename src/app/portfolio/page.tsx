@@ -16,10 +16,11 @@ import { useState } from "react";
 
 export default function PortfolioPage() {
   const [isImageExpanded, setIsImageExpanded] = useState(false);
-  
+
   const frontendSkills = [
     { name: "Next.js", starred: true },
     { name: "React", starred: true },
+    { name: "Electron", starred: false },
   ];
 
   const backendSkills = [{ name: "NestJS", starred: false }];
@@ -68,6 +69,17 @@ export default function PortfolioPage() {
     { name: "GitHub Actions", starred: false },
   ];
 
+  const monitoring = [
+    { name: "Google Analytics", starred: false },
+    { name: "Microsoft Clarity", starred: false },
+    { name: "Sentry", starred: false },
+  ];
+
+  const realtime = [
+    { name: "WebSocket", starred: false },
+    { name: "STOMP", starred: false },
+  ];
+
   const database = [
     { name: "MySQL", starred: false },
     { name: "MongoDB", starred: false },
@@ -111,28 +123,48 @@ export default function PortfolioPage() {
       featured: true,
     },
     {
-      title: "매치기",
-      description: "운동 메이트를 찾아주는 매칭 서비스입니다.",
+      title: "Project-UMM",
+      description:
+        "Electron 기반의 화상, 음성, 채팅 데스크톱 애플리케이션입니다.",
       details: [
-        "Kakao Map API를 활용한 지도 기반 모임 위치 선택",
-        "PWA 적용으로 모바일 앱 같은 사용자 경험 제공",
-        "React Query를 활용한 무한 스크롤 구현",
+        "Electron으로 크로스 플랫폼 데스크톱 앱 개발",
+        "WebSocket/STOMP를 활용한 실시간 통신",
+        "React Window를 활용한 대용량 리스트 가상화",
+        "암호화된 데이터 처리 (Crypto-js)",
       ],
-      technologies: ["React", "TypeScript", "React-Query", "PWA"],
-      githubUrl: "https://github.com/voyage-fianl-team1/frontend",
-      featured: false,
+      technologies: [
+        "Next.js",
+        "Electron",
+        "TypeScript",
+        "WebSocket",
+        "STOMP",
+        "React Window",
+        "Tailwind CSS",
+      ],
+      githubUrl: "https://github.com/project-umm/front-end",
+      featured: true,
+      inProgress: true,
     },
     {
-      title: "Newsquids",
-      description: "금융 및 암호화폐 뉴스를 실시간으로 제공하는 서비스입니다.",
+      title: "Custom NAS System",
+      description:
+        "라즈베리파이 기반 DIY NAS - 3D 프린팅 케이스 제작부터 Synology 스타일 웹 UI까지",
       details: [
-        "Google 소셜 로그인 구현",
-        "카테고리별 필터링 기능",
-        "페이지네이션 구현",
+        "Raspberry Pi 세팅 및 3-bay HDD 인클로저 3D 프린팅",
+        "Next.js 기반 NAS 관리자 대시보드 개발",
+        "실시간 시스템 모니터링 및 파일 매니저 UI 구현",
+        "백엔드 개발자와 협업 예정",
       ],
-      technologies: ["Next.js", "TypeScript", "Recoil"],
-      githubUrl: "https://github.com/Newsquids/Frontend",
+      technologies: [
+        "Next.js",
+        "TypeScript",
+        "Tailwind CSS",
+        "WebSocket",
+        "3D Printing",
+        "Raspberry Pi",
+      ],
       featured: false,
+      planned: true,
     },
   ];
 
@@ -152,7 +184,9 @@ export default function PortfolioPage() {
               />
             </div>
             <div className="text-center sm:text-left flex-1">
-              <h1 className="text-4xl font-bold text-blog-text mb-2">Jimin Park</h1>
+              <h1 className="text-4xl font-bold text-blog-text mb-2">
+                Jimin Park
+              </h1>
               <p className="text-xl text-blog-text-muted mb-4">
                 Frontend Developer
               </p>
@@ -326,6 +360,38 @@ export default function PortfolioPage() {
               </h3>
               <div className="flex flex-wrap gap-2">
                 {cloudServices.map((skill) => (
+                  <SkillBadge
+                    key={skill.name}
+                    name={skill.name}
+                    starred={skill.starred}
+                  />
+                ))}
+              </div>
+            </div>
+
+            {/* Monitoring & Analytics */}
+            <div>
+              <h3 className="text-lg font-semibold text-blog-text mb-3">
+                Monitoring & Analytics
+              </h3>
+              <div className="flex flex-wrap gap-2">
+                {monitoring.map((skill) => (
+                  <SkillBadge
+                    key={skill.name}
+                    name={skill.name}
+                    starred={skill.starred}
+                  />
+                ))}
+              </div>
+            </div>
+
+            {/* Real-time Communication */}
+            <div>
+              <h3 className="text-lg font-semibold text-blog-text mb-3">
+                Real-time Communication
+              </h3>
+              <div className="flex flex-wrap gap-2">
+                {realtime.map((skill) => (
                   <SkillBadge
                     key={skill.name}
                     name={skill.name}

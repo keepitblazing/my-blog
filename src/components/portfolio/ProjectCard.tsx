@@ -10,6 +10,8 @@ interface ProjectCardProps {
   featured?: boolean;
   review?: string;
   details?: string[];
+  inProgress?: boolean;
+  planned?: boolean;
 }
 
 export default function ProjectCard({
@@ -21,17 +23,31 @@ export default function ProjectCard({
   image,
   featured = false,
   review,
-  details
+  details,
+  inProgress = false,
+  planned = false
 }: ProjectCardProps) {
   return (
     <div className={`bg-blog-black border rounded-lg p-6 transition-all duration-200 hover:border-blog-text ${
       featured ? 'border-blog-text' : 'border-blog-grey'
     }`}>
-      {featured && (
-        <span className="inline-block px-2 py-1 text-xs font-medium text-blog-white bg-blog-grey rounded-md mb-3">
-          주요 프로젝트 ⭐
-        </span>
-      )}
+      <div className="flex gap-2 mb-3">
+        {featured && (
+          <span className="inline-block px-2 py-1 text-xs font-medium text-blog-white bg-blog-grey rounded-md">
+            주요 프로젝트 ⭐
+          </span>
+        )}
+        {inProgress && (
+          <span className="inline-block px-2 py-1 text-xs font-medium text-blog-white bg-green-900 rounded-md">
+            진행중 🚀
+          </span>
+        )}
+        {planned && (
+          <span className="inline-block px-2 py-1 text-xs font-medium text-blog-white bg-blue-900 rounded-md">
+            구상중 💡
+          </span>
+        )}
+      </div>
       
       {image && (
         <div className="mb-4 rounded-lg overflow-hidden bg-blog-grey h-48 flex items-center justify-center">
