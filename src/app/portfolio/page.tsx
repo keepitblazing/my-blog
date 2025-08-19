@@ -1,3 +1,4 @@
+"use client";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
@@ -11,8 +12,11 @@ import ProjectCard from "@/components/portfolio/ProjectCard";
 import GitHubStats from "@/components/portfolio/GitHubStats";
 import GitHubContributions from "@/components/portfolio/GitHubContributions";
 import Image from "next/image";
+import { useState } from "react";
 
 export default function PortfolioPage() {
+  const [isImageExpanded, setIsImageExpanded] = useState(false);
+  
   const frontendSkills = [
     { name: "Next.js", starred: true },
     { name: "React", starred: true },
@@ -372,9 +376,10 @@ export default function PortfolioPage() {
           <div className="bg-blog-black border border-blog-grey rounded-lg p-6">
             <div className="flex items-center gap-4 mb-4">
               <img
-                src="/Dayjs.png"
+                src="/dayjs.png"
                 alt="Day.js"
-                className="w-16 h-16 rounded-md"
+                className="w-16 h-16 rounded-md cursor-pointer hover:opacity-80 transition-all animate-pulse-border"
+                onClick={() => setIsImageExpanded(!isImageExpanded)}
               />
               <div>
                 <h3 className="text-xl font-bold text-blog-text">
@@ -385,6 +390,16 @@ export default function PortfolioPage() {
                 </p>
               </div>
             </div>
+            {isImageExpanded && (
+              <div className="mb-4 flex justify-center">
+                <img
+                  src="/dayjs.png"
+                  alt="Day.js"
+                  className="max-w-full h-auto rounded-md cursor-pointer"
+                  onClick={() => setIsImageExpanded(false)}
+                />
+              </div>
+            )}
             <p className="text-blog-text mb-4">
               현업 및 사이드 프로젝트에서 자주 사용하는 Day.js 라이브러리의
               한국어 문서를 살펴보던 중, 번역에 오역이나 문장의 앞뒤가 맞지 않는

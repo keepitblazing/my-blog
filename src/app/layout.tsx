@@ -60,7 +60,7 @@ export default function RootLayout({
         className="min-h-screen bg-black text-white"
       >
         <Navbar />
-        <main className="max-w-7xl mx-auto p-4">{children}</main>
+        <main className="max-w-7xl mx-auto p-2">{children}</main>
       </body>
     </html>
   );
