@@ -148,9 +148,9 @@ export default function PortfolioPage() {
               />
             </div>
             <div className="text-center sm:text-left flex-1">
-              <h1 className="text-4xl font-bold text-blog-text mb-2">박지민</h1>
+              <h1 className="text-4xl font-bold text-blog-text mb-2">Jimin Park</h1>
               <p className="text-xl text-blog-text-muted mb-4">
-                프론트엔드 개발자
+                Frontend Developer
               </p>
               <div className="flex gap-4 justify-center sm:justify-start mb-4">
                 <Link
@@ -184,7 +184,7 @@ export default function PortfolioPage() {
 
         {/* Skills Section */}
         <section className="mb-12">
-          <SectionTitle>기술 스택</SectionTitle>
+          <SectionTitle>Tech Stack</SectionTitle>
 
           <div className="space-y-6">
             {/* Frontend */}
@@ -367,7 +367,7 @@ export default function PortfolioPage() {
 
         {/* Open Source Contribution */}
         <section className="mb-12">
-          <SectionTitle>오픈소스 컨트리뷰트</SectionTitle>
+          <SectionTitle>Open Source Contributions</SectionTitle>
 
           <div className="bg-blog-black border border-blog-grey rounded-lg p-6">
             <div className="flex items-center gap-4 mb-4">
@@ -407,7 +407,7 @@ export default function PortfolioPage() {
 
         {/* Projects Section */}
         <section className="mb-12">
-          <SectionTitle>프로젝트</SectionTitle>
+          <SectionTitle>Projects</SectionTitle>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {projects.map((project) => (
@@ -418,7 +418,7 @@ export default function PortfolioPage() {
 
         {/* Skills Detail Section */}
         <section className="mb-12">
-          <SectionTitle>기술 스택 상세</SectionTitle>
+          <SectionTitle>Tech Stack Details</SectionTitle>
 
           <div className="space-y-8">
             {/* Frontend Skills Detail */}
