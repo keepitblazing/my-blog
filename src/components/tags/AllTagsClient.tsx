@@ -16,7 +16,9 @@ export default function AllTagsClient() {
     const fetchTags = async () => {
       try {
         const data = await getTagsWithCount();
-        setTags(data.sort((a, b) => b.count - a.count));
+        // 포스트가 있는 태그만 필터링하고 개수 순으로 정렬
+        const tagsWithPosts = data.filter(tag => tag.count > 0);
+        setTags(tagsWithPosts.sort((a, b) => b.count - a.count));
       } catch (error) {
         console.error("Error fetching tags:", error);
       } finally {

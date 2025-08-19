@@ -1,0 +1,32 @@
+/* GitHub Calendar Custom Styles */
+.react-activity-calendar__count {
+  color: #e5e5e7 !important;
+}
+
+.react-activity-calendar__legend-month {
+  fill: #e5e5e7 !important;
+}
+
+/* 비어있는 날짜 (contribution 0인 날) 스타일 */
+.react-activity-calendar rect[data-level="0"] {
+  fill: #000000 !important;
+  stroke: #222225 !important;
+  stroke-width: 1px !important;
+}
+
+/* 나머지 레벨들 */
+.react-activity-calendar rect[data-level="1"] {
+  fill: #222225 !important;
+}
+
+.react-activity-calendar rect[data-level="2"] {
+  fill: #2a2a2f !important;
+}
+
+.react-activity-calendar rect[data-level="3"] {
+  fill: #3a3a3f !important;
+}
+
+.react-activity-calendar rect[data-level="4"] {
+  fill: #4a4a4f !important;
+}

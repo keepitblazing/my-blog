@@ -17,6 +17,7 @@ const NAV_LINKS: NavLink[] = [
   { href: "/dev", label: "개발" },
   { href: "/diary", label: "일기" },
   { href: "/tags", label: "태그" },
+  { href: "/portfolio", label: "포트폴리오" },
   { href: "/post/create", label: "글쓰기", adminOnly: true },
 ];
 
@@ -154,7 +155,7 @@ export default function Navbar() {
                   Keep it blazing🔥
                 </Link>
               </div>
-              <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
+              <div className="hidden md:ml-6 md:flex md:space-x-8">
                 {NAV_LINKS.map(
                   (link) =>
                     (!link.adminOnly || isAdmin) && (
