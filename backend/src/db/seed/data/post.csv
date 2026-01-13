@@ -1,0 +1,415 @@
+id,title,content,created_at,updated_at,category,is_private
+484f6810-4a3c-432d-8756-cb06f30a9cc2,블로그 단장중입니다., 블로그 이사중입니다~,2025-05-21T05:53:57.894Z,,dev,false
+08dbf379-dfb8-459b-840c-865d59c63806,면접 예상 질문 리스트,"<span style=""font-size:25px;"">프론트엔드 면접 질문 정리</span>
+
+## 네트워크 & 브라우저
+
+1. 브라우저 주소창에 www.google.com을 입력하면 어떤 일이 일어나나요?
+2. GET과 POST의 차이는 무엇인가요?
+3. HTTP METHOD에 대해 설명해주세요.
+4. HTTP 상태 코드에 대해 말해주세요.
+5. DNS에 대해 설명해주세요.
+6. REST API에 대해 설명해주세요.
+7. 브라우저 렌더링 과정을 설명해주세요.
+8. 브라우저는 어떻게 동작 하나요?
+9. CSR과 SSR의 차이는 무엇인가요?
+10. 쿠키와 세션에 대해 설명해주세요.
+11. 쿠키, 세션, 웹스토리지의 차이에 대해 설명해주세요.
+12. 웹 소켓을 사용해보셨나요?
+13. CORS는 무엇의 약자이고 어떤 문제에 대해서 언급하는 것인가요?
+14. URI과 URL의 차이에 대해 설명해 주세요.
+15. HTTP와 HTTPS의 차이점을 설명해 주세요.
+16. TCP/UDP에 대해서 설명해주세요.
+17. Ajax에 대해 설명해 주세요.
+18. Payload와 Header의 차이를 설명해주세요.
+19. OAuth란? OAuth의 동작 방식은 어떻게 되나요?
+20. JWT란 무엇인가요?
+21. JWT방식과 Session방식의 차이점을 설명해주세요.
+22. WebSocket과 HTTP의 차이점을 설명해주세요.
+23. Cache-Control 헤더와 브라우저 캐싱 전략에 대해 설명해주세요.
+24. CDN의 동작 원리와 장점을 설명해주세요.
+25. Preflight 요청이 무엇인지 설명해주세요.
+
+## 자바스크립트 기초
+
+26. 프로세스와 스레드에 대해 설명해주세요.
+27. 멀티 프로세스와 멀티 스레드의 차이에 대해 설명해 주세요.
+28. 자료구조 stack과 queue에 대해 설명해주세요.
+29. List, Map, Set의 차이점을 설명해 주세요.
+30. 동기와 비동기의 차이에 대해 설명해 주시고, 비동기 프로그래밍의 필요성에 대해 설명해 보세요.
+31. Blocking과 Non-Blocking의 차이를 설명해 주세요.
+32. Promise와 Callback 차이를 설명해주세요.
+33. async, await 사용 방법을 설명해주세요.
+34. Promise와 Async / Await의 차이에 대해 설명해 보세요.
+35. 콜백함수에 대해 설명해 주세요.
+36. 콜백지옥의 의미와 콜백지옥을 해결하는 방법을 설명해 주세요.
+37. Event loop에 대해 설명해 주세요.
+38. 이벤트 루프와 태스크 큐에 대해 설명해주세요.
+39. call stack과 task queue에 관해 설명해주세요.
+40. setTimeout과 setInterval의 차이점을 설명해주세요.
+41. for...in과 for...of의 차이점을 설명해주세요.
+42. try-catch-finally 문에서 finally의 역할을 설명해주세요.
+43. 자바스크립트 엔진의 동작 원리(V8 엔진)에 대해 설명해주세요.
+
+## 자바스크립트 심화
+
+44. 이벤트 버블링과 캡처링에 대해 설명해주세요.
+45. 이벤트 전파와 이벤트 위임에 대해 설명해 주세요.
+46. 클로저(Closure)에 대해 설명해주세요.
+47. 실행 컨텍스트에 대해 설명해주세요.
+48. 렉시컬 환경(Lexical Environment)에 대해 설명해주세요.
+49. 렉시컬 스코프에 대해 설명해주세요.
+50. 스코프와 스코프 체인에 대해 설명해 주세요.
+51. 프로토타입에 대해 설명해주세요.
+52. 프로토타입과 프로토타입 체인에 대해 설명해 주세요.
+53. this에 대해 설명해주세요.
+54. 함수 선언형과 함수 표현식의 차이에 대해 설명해주세요.
+55. 일반 함수와 화살표 함수의 차이를 설명해 주세요.
+56. 호이스팅(hoisting)에 대해 설명해 보세요.
+57. var, let, const의 차이에 대해 설명해 보세요.
+58. TDZ란 무엇인가요?
+59. '=='와 '===' 연산자의 차이는 무엇인지 설명해 보세요.
+60. 자바스크립트 데이터 타입에 대해 설명해 주세요.
+61. null, undefined, undeclared, NaN에 대해 설명해 주세요.
+62. 자바스크립트에서 일어나는 데이터 형 변환에 대해 설명해주세요.
+63. 깊은 복사와 얕은 복사에 대해 설명해주세요.
+64. mutable과 immutable에 대해 설명해 주세요.
+65. 불변성을 유지하려면 어떻게 해야하나요?
+66. 상태의 불변성이 중요한 이유가 무엇인가요?
+67. 구조 분해 할당(destructuring)에 대해 설명해 주세요.
+68. spread 문법과 rest 문법의 차이에 대해 설명해 주세요.
+69. ES6에서 생긴 큰 변화들에 대해 설명해 주세요.
+70. map과 forEach의 차이를 설명해 주세요.
+71. 메서드 체이닝에 대해 설명해 주세요.
+72. throttle과 debounce에 대해 설명해 주세요.
+73. iterable, iterator, generator에 대해 설명해 주세요.
+74. Generator 문법에 대해 설명해주세요.
+75. 자바스크립트 동작 원리에 대해 설명해 주세요.
+76. 객체 지향 프로그래밍에 대해 설명해 주세요.
+77. import와 require의 차이점에 대해 설명해 주세요.
+78. Currying과 Partial Application에 대해 설명해주세요.
+79. 고차함수(Higher-Order Function)에 대해 설명해주세요.
+80. 함수형 프로그래밍의 특징과 장점을 설명해주세요.
+81. Monad 패턴에 대해 들어보셨나요?
+82. 자바스크립트의 메모리 관리와 가비지 컬렉션에 대해 설명해주세요.
+83. WeakMap과 Map의 차이점을 설명해주세요.
+
+## React
+
+84. Virtual DOM에 대해 설명해 주세요.
+85. Virtual DOM 작동 원리에 대해 설명해주세요.
+86. React를 사용하는 이유에 대해 말씀해주세요.
+87. React의 장점과 단점을 설명해 주세요.
+88. React 라이브러리는 왜 생겨났나요?
+89. 클래스형 컴포넌트와 함수형 컴포넌트의 차이에 대해 설명해주세요.
+90. 생명 주기 메서드에 대해 설명해주세요.
+91. React Lifecycle에 대해 설명해 주세요.
+92. 리액트에서 JSX 문법이 어떻게 사용되나요?
+93. JSX란 무엇인가요?
+94. 브라우저는 JSX 파일을 읽을 수 있나요?
+95. 재조정(Reconciliation) 개념에 대해서 설명해 주세요.
+96. 왜 state를 직접 바꾸지 않고 useState를 사용해야 하나요?
+97. useState에 대해 설명해 주세요.
+98. useEffect에 대해 설명해 주세요.
+99. useEffect의 실행 순서에 대해 설명해 보세요.
+100.  useEffect와 useLayoutEffect의 차이점에 대해 말씀해주세요.
+101.  useRef에 대해 설명해 보세요.
+102.  useMemo와 useCallback에 대해 설명해주세요.
+103.  React Hooks에 대해 설명해 주세요.
+104.  리액트에서 메모이제이션을 어떤 방식으로 하나요?
+105.  리액트의 렌더링 성능 향상을 위해 어떻게 해야 하나요?
+106.  React rendering 성능을 향상하기 위한 방법들을 설명해 주세요.
+107.  Context API에 대해 설명해주세요.
+108.  Props drilling의 개념과 Props drilling을 피하는 방법에 대해 설명해 주세요.
+109.  key props를 사용하는 이유는 무엇인가요?
+110.  제어 컴포넌트와 비제어 컴포넌트의 차이에 대해 설명해주세요.
+111.  props와 state의 차이는 무엇인가요?
+112.  자식 컴포넌트에서 props를 변경할 수 있나요?
+113.  pure component에 대해 설명해주세요.
+114.  shouldComponentUpdate에 대해 설명해주세요.
+115.  React 18 버전 업데이트 내용에 대해 말씀해주세요.
+116.  React.memo()와 useMemo()의 차이점을 설명해주세요.
+117.  useReducer를 언제 사용하나요? useState와의 차이점은?
+118.  Custom Hook을 만들어본 경험이 있나요? 언제 사용하나요?
+119.  React의 Fiber 아키텍처에 대해 설명해주세요.
+120.  Suspense와 Concurrent Features에 대해 설명해주세요.
+121.  React DevTools을 어떻게 활용하시나요?
+122.  HOC(Higher-Order Component)와 Render Props 패턴에 대해 설명해주세요.
+123.  React Portal을 사용해본 경험이 있나요?
+
+## 상태 관리
+
+124.  전역 상태 관리 방법에 대해 설명해 주세요.
+125.  Redux를 사용하는 이유가 무엇인가요?
+126.  Redux의 장단점에 대해 설명해주세요.
+127.  Context API와 Redux를 비교해주세요.
+128.  Recoil과 Redux의 차이점을 설명해주세요.
+129.  Redux-saga에 대해 설명해주세요.
+130.  Redux-saga와 Redux-Thunk의 차이에 대해 설명해주세요.
+131.  상태 정규화(State Normalization)에 대해 설명해주세요.
+132.  Redux Toolkit(RTK)을 사용해보셨나요? 장점은 무엇인가요?
+133.  전역 상태와 로컬 상태를 어떻게 구분해서 관리하시나요?
+
+## React Query
+
+134.  React-query에 대해 들어봤나요?
+135.  React Query에서 캐시의 역할은 무엇이고, 어떻게 동작하는지 설명해주세요.
+136.  React Query의 SSR 지원에 대해서 어떻게 생각하나요? 어떻게 설정하고 사용하는지 설명해주세요.
+137.  React Query와 Redux의 주요 차이점은 무엇이며, 어떤 상황에서 React Query를 선호하는지 말해보세요.
+138.  Query, Mutation, 그리고 Query Invalidation에 대해 간단히 설명해보세요.
+139.  React Query의 인터셉터(interceptor)는 어떤 용도로 사용되며 어떤 상황에서 유용한가요?
+140.  React Query와 함께 사용되는 동작 패턴 중 Suspense와 Error Boundaries를 어떻게 활용할 수 있는지 설명해보세요.
+141.  React Query의 Paginated Queries를 어떻게 구현하는지 설명해주세요.
+142.  React Query에서 optimistic updates은 무엇이며 어떻게 구현할 수 있는지 설명해보세요.
+
+## TypeScript
+
+143.  타입스크립트를 사용하는 이유에 대해 설명해주세요.
+144.  Type과 Interface의 차이점에 대해 설명해주세요.
+145.  제네릭에 대해 설명해주세요.
+146.  제네릭 유틸리티 타입에 대해 설명해주세요.
+147.  클래스의 Public, Private, Protected에 대해 설명해주세요.
+148.  클래스의 Static에 대해 설명해주세요.
+149.  any와 unknown의 차이점을 설명해주세요.
+150.  Union Type과 Intersection Type에 대해 설명해주세요.
+151.  타입 가드(Type Guard)에 대해 설명해주세요.
+152.  never 타입은 언제 사용하나요?
+153.  조건부 타입(Conditional Types)에 대해 설명해주세요.
+154.  타입스크립트의 컴파일 과정을 설명해주세요.
+
+## 빌드 도구 & 번들링
+
+155.  Webpack, Babel, Polyfill에 대해 설명해주세요.
+156.  npm에 대해 설명해 주세요.
+157.  package.json과 package-lock.json의 역할에 대해 설명해 주세요.
+158.  bundle의 사이즈를 줄이려면 어떻게 해야 하나요?
+159.  모듈 시스템(CommonJS, AMD, ES6 Modules)의 차이점을 설명해주세요.
+160.  Tree Shaking이 어떻게 동작하는지 설명해주세요.
+161.  Source Map이 무엇인지 설명해주세요.
+162.  Hot Module Replacement(HMR)에 대해 설명해주세요.
+
+## CSS
+
+163.  Cascading에 관해서 설명해주세요.
+164.  CSS 애니메이션과 JS 애니메이션의 차이에 대해 설명해주세요.
+165.  Tailwind CSS와 같은 Utility-first CSS 프레임워크를 사용하는 이유는 무엇인가요? 어떤 장점이 있나요?
+166.  CSS-in-JS의 장점과 단점은 무엇인가요? 그리고 왜 styled-components나 emotion 같은 라이브러리를 선택하게 되었나요?
+167.  CSS-in-JS를 사용하면서 발생할 수 있는 성능 이슈에 대해서 어떻게 대응하나요?
+168.  CSS Modules와 CSS-in-JS의 차이점과 각각의 장단점에 대해 설명해보세요.
+169.  Emotion의 Server-Side Rendering(SSR)에 대해 어떻게 설정하고 사용하는지 설명해보세요.
+170.  Flexbox를 사용해보셨나요?
+171.  Grid를 사용해보셨나요?
+172.  position 속성을 나열해주세요.
+173.  styled-components와 emotion의 차이점은 무엇이며, 어떤 상황에서 어떤 라이브러리를 선택해야 할까요?
+174.  Tailwind CSS에서 커스텀 스타일을 적용하거나 확장하는 방법에 대해 설명해보세요.
+175.  styled-components의 Theming 기능은 무엇이고, 어떻게 활용할 수 있나요?
+176.  CSS-in-JS에서 컴포넌트 스타일링에 있어서 Global Styles과 Local Styles의 차이는 무엇인가요?
+177.  Tailwind CSS의 Just-in-Time 컴파일 모드가 무엇이며, 어떤 장점이 있는지 설명해보세요.
+178.  CSS 변수(Custom Properties)에 대해 설명해주세요.
+179.  CSS Grid와 Flexbox를 언제 각각 사용하나요?
+180.  CSS 애니메이션 성능 최적화 방법을 설명해주세요.
+181.  Critical CSS에 대해 설명해주세요.
+182.  CSS 방법론(BEM, OOCSS, SMACSS)에 대해 설명해주세요.
+
+## 성능 최적화 & 실무
+
+183.  웹사이트 성능 최적화에는 어떤 방법이 있나요?
+184.  페이지 로드 시간을 줄이는 방법들에 대해서 설명해 주세요.
+185.  이미지 최적화에 대해 설명해주시고 방법에 대해 설명해주세요.
+186.  requestAnimationFrame을 사용해본 적 있나요?
+187.  100개의 API 호출이 있다고 했을 때, 오류 처리를 어떻게 할 것인가요?
+188.  데이터 10,000개를 가지고 무한 스크롤을 구현한다면, 가장 중요하게 고려해야 할 것은 무엇일까요?
+189.  로그인 처리를 할 때 쿠키와 세션을 어떻게 사용하시나요?
+190.  프론트에서 보안을 신경써야할할 점들은 무엇이 있을까요?
+191.  메모이제이션을 언제 사용해야 하고 언제 사용하지 말아야 하나요?
+192.  번들 사이즈를 분석하고 최적화하는 방법을 설명해주세요.
+193.  이미지 lazy loading을 구현하는 방법들을 설명해주세요.
+194.  웹 폰트 로딩 최적화 방법을 설명해주세요.
+
+## HTML
+
+195.  DOM에 대해 설명해 주세요.
+196.  SPA, CSR, SSR의 차이를 설명해 주세요.
+197.  Sementic Markup에 대해 설명해 주세요.
+198.  HTML에서의 attributes와 properties의 차이점을 설명해 주세요.
+199.  시맨틱 태그를 사용하는 이유와 장점을 설명해주세요.
+200.  meta 태그의 역할들을 설명해주세요.
+201.  form 요소의 validation 속성들에 대해 설명해주세요.
+
+## 개발 환경 & 협업
+
+202.  웹 표준을 지키며 개발하시나요?
+203.  크로스 브라우징 경험이 있으신가요?
+204.  라이브러리와 프레임워크에 대해 설명해 보세요.
+205.  MVC, MVVM 패턴에 대해 설명해 주세요.
+206.  테스트 코드에 대해 설명해 주세요.
+207.  웹 서비스 배포 시스템 구축 경험이 있으신가요?
+208.  CI/CD에 대해 설명해 주세요.
+209.  SEO란 무엇인가요?
+210.  SPA에서 SEO에 유리하도록 만들기 위한 방법에 대해 설명해주세요.
+211.  Git 워크플로우(Git Flow, GitHub Flow)에 대해 설명해주세요.
+212.  코드 컨벤션의 중요성과 ESLint 설정 경험을 말씀해주세요.
+213.  디자인 시스템을 구축해본 경험이 있나요?
+
+## 개인 경험 & 태도
+
+214.  자기소개 부탁드립니다.
+215.  회사 지원 동기가 어떻게 되시나요.
+216.  프론트엔드 포지션을 선택한 이유가 어떻게 되시나요?
+217.  최근에 경험했던 기억에 남는 에러에 대해 말씀해주세요.
+218.  요즘 공부하시고 있는 것에 대해 말씀해주세요.
+219.  어제/이번 주에 무엇을 공부하셨나요?
+220.  새로운 기술을 습득하기 위해 어떠한 방식으로 연구하시나요?
+221.  협업을 하면서 갈등이 생겼던 경험이 있으신가요?
+222.  개발 도중에 발생하는 에러에 대해 보통 어떻게 대처하시나요?
+223.  코딩을 할 때 당신을 들뜨게 하거나 흥미를 끄는 것들은 무엇인가요?
+224.  최근에 당신이 경험한 기술적인 문제는 무엇이고 그것을 어떻게 해결했나요?
+225.  선호하는 개발 환경에 대해 자유롭게 이야기해 주세요.
+226.  버전 관리 시스템은 어떤 것들을 사용해보셨습니까?
+227.  리액트 관련 패키지 중에 제일 좋다고 생각한 것은 무엇인가요?
+
+## 실무 시나리오
+
+228.  2개의 변수가 있다고 했을 때 변수에 담긴 데이터를 서로 뒤바꾸고 싶을 때 어떻게 처리할 것인가요?
+229.  웹 애플리케이션이나 사이트를 만들 때 고려해야 할 UI, Security, Performance, SEO, Maintainability에 대해서 설명해주세요.
+230.  당신이 웹 페이지를 만들 때의 과정을 설명해주실 수 있을까요?
+231.  당신에게 5가지 다른 stylesheet가 있습니다. 어떤 방법으로 사이트에 제공하는 게 가장 효과적일까요?
+232.  점진적 향상법(progressive enhancement)과 우아한 성능저하법(graceful degradation)의 차이를 설명하실 수 있습니까?
+233.  웹사이트에서 assets/resources를 최적화하는 방법에 관해 설명해주세요.
+234.  브라우저가 한 번에 1개의 도메인에서 내려받는 자원은 몇 개인가요? 예외에는 어떤 것들이 있나요?
+235.  당신이 프로젝트에 합류했습니다. 근데 그들은 Tab을 이용하고, 당신은 Space를 사용했습니다. 어떻게 하실 건가요?
+236.  간단한 Slideshow 페이지를 만드는 방법에 관해서 이야기해 보세요.
+237.  만약 당신이 올해 기술적 책임자가 되었다면 무엇을 먼저 하시겠습니까?
+238.  표준의 중요성에 관해 설명해주세요.
+
+## 접근성 & 웹 표준
+
+239.  Flash of Unstyled Content에 관해 설명해주세요. 또 FOUC를 피하기 위해선 어떻게 해야 하나요?
+240.  ARIA와 screenreader에 대해 설명해주세요. 또 접근성을 지원하는 웹사이트를 어떻게 만드는지에 대해도 설명해주세요.
+241.  키보드 네비게이션 지원 방법을 설명해주세요.
+242.  색상 대비와 접근성 가이드라인에 대해 설명해주세요.
+243.  스크린 리더 사용자를 위한 개발 고려사항을 설명해주세요.
+
+## 모던 웹 개발 & 프레임워크
+
+244.  Next.js를 사용해본 경험이 있나요? Next.js의 장점과 주요 기능들을 설명해주세요.
+245.  Server Components와 Client Components의 차이점에 대해 설명해주세요.
+246.  App Router와 Pages Router의 차이점은 무엇인가요?
+247.  Static Generation, Server-side Rendering, Client-side Rendering의 차이점과 각각 언제 사용해야 하는지 설명해주세요.
+248.  Incremental Static Regeneration (ISR)에 대해 설명해주세요.
+249.  Micro Frontend 아키텍처에 대해 들어보셨나요? 장단점은 무엇인가요?
+250.  Module Federation에 대해 설명해주세요.
+251.  Monorepo와 Polyrepo의 차이점과 각각의 장단점을 설명해주세요.
+252.  Turborepo, Lerna, Nx 같은 모노레포 도구들을 사용해보셨나요?
+
+## 최신 JavaScript & Web APIs
+
+253.  Web Workers에 대해 설명해주세요. 언제 사용하나요?
+254.  Service Worker와 PWA에 대해 설명해주세요.
+255.  Intersection Observer API에 대해 설명해주세요.
+256.  Mutation Observer에 대해 설명해주세요.
+257.  Web Components에 대해 설명해주세요.
+258.  Custom Elements와 Shadow DOM에 대해 설명해주세요.
+259.  Proxy와 Reflect에 대해 설명해주세요.
+260.  WeakMap과 WeakSet의 용도와 Map, Set과의 차이점을 설명해주세요.
+261.  BigInt와 Symbol 타입에 대해 설명해주세요.
+262.  Optional Chaining과 Nullish Coalescing에 대해 설명해주세요.
+263.  Top-level await에 대해 설명해주세요.
+
+## 성능 & 최적화 심화
+
+264.  Core Web Vitals에 대해 설명해주세요.
+265.  LCP, FID, CLS를 개선하는 방법들을 설명해주세요.
+266.  Lighthouse 점수를 개선하기 위한 방법들을 설명해주세요.
+267.  Critical Rendering Path에 대해 설명해주세요.
+268.  Resource Hints (preload, prefetch, preconnect, dns-prefetch)에 대해 설명해주세요.
+269.  Code Splitting과 Dynamic Import에 대해 설명해주세요.
+270.  Tree Shaking에 대해 설명해주세요.
+271.  Bundle Analyzer를 통한 번들 분석 경험이 있나요?
+272.  Preloading, Prefetching 전략에 대해 설명해주세요.
+273.  Memory Leak을 방지하는 방법들을 설명해주세요.
+
+## 테스팅
+
+274.  Jest와 Testing Library를 사용한 테스트 작성 경험이 있나요?
+275.  Unit Test, Integration Test, E2E Test의 차이점을 설명해주세요.
+276.  Test Driven Development (TDD)에 대한 생각을 말씀해주세요.
+277.  Cypress, Playwright 같은 E2E 테스트 도구를 사용해보셨나요?
+278.  Storybook을 사용해보셨나요? 어떤 장점이 있나요?
+279.  Visual Regression Testing에 대해 들어보셨나요?
+280.  Mock, Stub, Spy의 차이점을 설명해주세요.
+
+## 보안 & 웹 표준
+
+281.  XSS (Cross-Site Scripting) 공격과 방어 방법에 대해 설명해주세요.
+282.  CSRF (Cross-Site Request Forgery) 공격과 방어 방법에 대해 설명해주세요.
+283.  Content Security Policy (CSP)에 대해 설명해주세요.
+284.  Same-Origin Policy에 대해 설명해주세요.
+285.  Subresource Integrity (SRI)에 대해 설명해주세요.
+286.  OWASP Top 10에 대해 알고 계신가요?
+
+## 최신 빌드 도구 & 개발 환경
+
+287.  Vite에 대해 들어보셨나요? Webpack과의 차이점은 무엇인가요?
+288.  ESBuild, SWC 같은 빠른 빌드 도구들에 대해 설명해주세요.
+289.  Hot Module Replacement (HMR)에 대해 설명해주세요.
+290.  ESLint, Prettier를 프로젝트에서 어떻게 설정하고 사용하나요?
+291.  Husky, lint-staged를 사용해보셨나요?
+292.  Docker를 프론트엔드 개발에서 어떻게 활용할 수 있나요?
+
+## 상태 관리 심화
+
+293.  Zustand에 대해 들어보셨나요? Redux와 비교해주세요.
+294.  Jotai, Valtio 같은 atomic 상태 관리 라이브러리에 대해 설명해주세요.
+295.  Flux 패턴에 대해 설명해주세요.
+296.  상태 관리에서 불변성을 유지하기 위해 Immer 같은 라이브러리를 사용해보셨나요?
+
+## 데이터 페칭 & API
+
+297.  SWR과 React Query의 차이점을 설명해주세요.
+298.  Apollo Client를 사용해보셨나요? REST API 클라이언트와의 차이점은?
+299.  GraphQL에 대해 설명해주세요. REST API와 비교했을 때 장단점은?
+300.  tRPC에 대해 들어보셨나요?
+301.  Server-Sent Events (SSE)에 대해 설명해주세요.
+
+## 개발 방법론 & 아키텍처
+
+302.  Atomic Design Pattern에 대해 설명해주세요.
+303.  Design System을 구축해본 경험이 있나요?
+304.  Clean Architecture나 Hexagonal Architecture를 프론트엔드에 적용해본 경험이 있나요?
+305.  Feature-based 폴더 구조와 Type-based 폴더 구조의 차이점을 설명해주세요.
+306.  Composition over Inheritance 원칙에 대해 설명해주세요.
+
+## 실무 시나리오 심화
+
+307.  대용량 데이터를 효율적으로 렌더링하는 방법(Virtual Scrolling 등)을 설명해주세요.
+308.  다국어 지원(i18n)을 구현하는 방법들을 설명해주세요.
+309.  Dark Mode를 구현하는 방법들을 설명해주세요.
+310.  실시간 알림 시스템을 어떻게 구현하시겠나요?
+311.  파일 업로드 기능을 구현할 때 고려해야 할 점들은 무엇인가요?
+312.  드래그 앤 드롭 기능을 구현하는 방법을 설명해주세요.
+313.  복잡한 폼 상태 관리를 어떻게 하시겠나요? (React Hook Form, Formik 등)
+
+## 브라우저 & 플랫폼
+
+314.  브라우저별 호환성 이슈를 해결해본 경험이 있나요?
+315.  Polyfill과 Transpile의 차이점을 설명해주세요.
+316.  모바일 웹 개발 시 고려해야 할 점들을 설명해주세요.
+317.  터치 이벤트와 마우스 이벤트의 차이점을 설명해주세요.
+318.  Viewport Meta Tag에 대해 설명해주세요.
+
+## 협업 & 프로세스
+
+319.  코드 리뷰 시 어떤 점들을 중점적으로 보시나요?
+320.  기술 부채를 어떻게 관리하시나요?
+321.  레거시 코드를 리팩토링할 때 어떤 전략을 사용하시나요?
+322.  A/B 테스트를 프론트엔드에서 구현해본 경험이 있나요?
+323.  에러 트래킹과 모니터링을 어떻게 하시나요? (Sentry, LogRocket 등)
+
+## 미래 기술 & 트렌드
+
+324.  WebAssembly (WASM)에 대해 들어보셨나요?
+325.  Web3나 블록체인 관련 프론트엔드 개발 경험이 있나요?
+326.  AI/ML을 프론트엔드에서 활용해본 경험이 있나요?
+327.  Edge Computing과 CDN을 활용한 최적화에 대해 설명해주세요.
+328.  Serverless 아키텍처를 프론트엔드 관점에서 어떻게 활용할 수 있나요?",2025-05-26T02:32:37.382Z,,dev,true
