@@ -22,4 +22,8 @@ export class VisitorService {
   async getStats(days: number = 30) {
     return this.visitorRepository.getRecentDailyStats(days);
   }
+
+  async getTotalCount() {
+    return this.visitorRepository.getTotalCount();
+  }
 }

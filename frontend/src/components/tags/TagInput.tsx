@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { Tag } from '@/types/tag';
-import { searchTags, createTag } from '@/lib/supabase/tags';
+import { searchTags, createTag } from '@/lib/api';
 import { X, Plus } from 'lucide-react';
 
 interface TagInputProps {

@@ -3,9 +3,8 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { PostWithTags } from "@/types/post";
 import { formatDateMobile, formatDateDesktop } from "@/lib/utils";
-import { getPostById, deletePost } from "@/lib/supabase/post";
+import { getPostById, deletePost, Post } from "@/lib/api";
 import TagBadge from "@/components/tags/TagBadge";
 import MobileBackButton from "@/components/MobileBackButton";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -28,7 +27,7 @@ export default function PostDetailClient({
   category,
 }: PostDetailClientProps) {
   const router = useRouter();
-  const [post, setPost] = useState<PostWithTags | null>(null);
+  const [post, setPost] = useState<Post | null>(null);
   const [loading, setLoading] = useState(true);
   const [isAdmin, setIsAdmin] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);

@@ -1,13 +1,16 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-// 허용된 관리자 IP 목록
-const ADMIN_IPS = ["127.0.0.1", "::1", process.env.NEXT_PUBLIC_HOME_IP!];
+export async function GET(request: NextRequest) {
+  const homeIP = process.env.NEXT_PUBLIC_HOME_IP;
 
-export async function GET(request: Request) {
-  const forwardedFor = request.headers.get("x-forwarded-for");
-  const ip = forwardedFor ? forwardedFor.split(",")[0] : "127.0.0.1";
+  // X-Forwarded-For 또는 실제 IP 가져오기
+  const forwarded = request.headers.get("x-forwarded-for");
+  const cfIP = request.headers.get("cf-connecting-ip");
+  const realIP = request.headers.get("x-real-ip");
 
-  const isAdmin = ADMIN_IPS.includes(ip);
+  const clientIP = cfIP || forwarded?.split(",")[0]?.trim() || realIP || "unknown";
+
+  const isAdmin = clientIP === homeIP;
 
   return NextResponse.json({ isAdmin });
 }

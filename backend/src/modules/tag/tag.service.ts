@@ -14,6 +14,14 @@ export class TagService {
     return this.tagRepository.findAll();
   }
 
+  async search(query: string) {
+    return this.tagRepository.search(query);
+  }
+
+  async findAllWithCount() {
+    return this.tagRepository.findAllWithCount();
+  }
+
   async findById(id: string) {
     const tag = await this.tagRepository.findById(id);
     if (!tag) {

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { TagWithCount } from "@/types/tag";
-import { getTagsWithCount } from "@/lib/supabase/tags";
+import { getTagsWithCount } from "@/lib/api";
 import Link from "next/link";
 import { TagGridSkeleton } from "@/components/skeleton/TagSkeleton";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

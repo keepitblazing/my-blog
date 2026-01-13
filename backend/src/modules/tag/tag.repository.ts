@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { eq } from 'drizzle-orm';
+import { eq, ilike, sql, count } from 'drizzle-orm';
 import { DRIZZLE, DrizzleDB } from '@/common/database/drizzle.provider';
-import { tags, NewTag } from '@/db/schema';
+import { tags, postTags, NewTag } from '@/db/schema';
 
 @Injectable()
 export class TagRepository {
@@ -9,6 +9,31 @@ export class TagRepository {
 
   async findAll() {
     return this.db.select().from(tags).orderBy(tags.name);
+  }
+
+  async search(query: string) {
+    return this.db
+      .select()
+      .from(tags)
+      .where(ilike(tags.name, `%${query}%`))
+      .orderBy(tags.name)
+      .limit(10);
+  }
+
+  async findAllWithCount() {
+    const result = await this.db
+      .select({
+        id: tags.id,
+        name: tags.name,
+        slug: tags.slug,
+        createdAt: tags.createdAt,
+        count: count(postTags.postId),
+      })
+      .from(tags)
+      .leftJoin(postTags, eq(tags.id, postTags.tagId))
+      .groupBy(tags.id, tags.name, tags.slug, tags.createdAt)
+      .orderBy(tags.name);
+    return result;
   }
 
   async findById(id: string) {

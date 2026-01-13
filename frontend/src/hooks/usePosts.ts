@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react";
-import { PostWithTags } from "@/types/post";
-import { getPosts } from "@/lib/supabase/post";
+import { getPosts, Post } from "@/lib/api";
 
 type Category = "all" | "dev" | "diary";
 
 export function usePosts(category: Category = "all", tagSlugs?: string[]) {
-  const [posts, setPosts] = useState<PostWithTags[]>([]);
+  const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
   const [isAdmin, setIsAdmin] = useState(false);

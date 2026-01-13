@@ -53,6 +53,13 @@ export class VisitorRepository {
       .limit(days);
   }
 
+  async getTotalCount(): Promise<number> {
+    const [result] = await this.db
+      .select({ total: sql<number>`COALESCE(SUM(${dailyVisitors.count}), 0)` })
+      .from(dailyVisitors);
+    return result?.total || 0;
+  }
+
   async checkExistingVisitor(visitorHash: string, date: string) {
     const [existing] = await this.db
       .select({ id: visitorLogs.id })

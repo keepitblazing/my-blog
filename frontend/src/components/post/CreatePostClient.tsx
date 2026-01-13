@@ -6,7 +6,7 @@ import dynamic from "next/dynamic";
 import type { Editor as ToastEditorType } from "@toast-ui/react-editor";
 import "@toast-ui/editor/dist/toastui-editor.css";
 import "@toast-ui/editor/dist/theme/toastui-editor-dark.css";
-import { createPost } from "@/lib/supabase/post";
+import { createPost } from "@/lib/api";
 import { Tag } from "@/types/tag";
 import TagInput from "@/components/tags/TagInput";
 import {
@@ -88,7 +88,7 @@ export default function CreatePostClient() {
           title: title.trim(),
           content,
           category,
-          is_private: isPrivate,
+          isPrivate,
         },
         selectedTags.map((tag) => tag.id)
       );

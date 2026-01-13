@@ -1,10 +1,9 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { PostWithTags } from "@/types/post";
+import { Post } from "@/lib/api";
 import { Tag } from "@/types/tag";
-import { getPostsByTag } from "@/lib/supabase/post";
-import { getTagBySlug } from "@/lib/supabase/tags";
+import { getPostsByTag, getTagBySlug } from "@/lib/api";
 import PostList from "@/components/post/PostList";
 import { PostListSkeleton } from "@/components/skeleton/PostSkeleton";
 import Link from "next/link";
@@ -17,7 +16,7 @@ interface TagPostsClientProps {
 }
 
 export default function TagPostsClient({ tagSlug }: TagPostsClientProps) {
-  const [posts, setPosts] = useState<PostWithTags[]>([]);
+  const [posts, setPosts] = useState<Post[]>([]);
   const [tag, setTag] = useState<Tag | null>(null);
   const [loading, setLoading] = useState(true);
   const [isAdmin, setIsAdmin] = useState(false);

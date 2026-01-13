@@ -4,10 +4,9 @@ import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import dynamic from "next/dynamic";
 import type { Editor as ToastEditorType } from "@toast-ui/react-editor";
-import { getPostById, updatePost } from "@/lib/supabase/post";
+import { getPostById, updatePost, Post } from "@/lib/api";
 import "@toast-ui/editor/dist/toastui-editor.css";
 import "@toast-ui/editor/dist/theme/toastui-editor-dark.css";
-import { PostWithTags } from "@/types/post";
 import { Tag } from "@/types/tag";
 import TagInput from "@/components/tags/TagInput";
 import MobileBackButton from "@/components/MobileBackButton";
@@ -35,7 +34,7 @@ const ToastEditor = dynamic(
 export default function EditPostClient({ id }: { id: string }) {
   const router = useRouter();
   const editorRef = useRef<ToastEditorType>(null);
-  const [post, setPost] = useState<PostWithTags>({
+  const [post, setPost] = useState<Post>({
     id: "",
     title: "",
     content: "",
@@ -122,7 +121,7 @@ export default function EditPostClient({ id }: { id: string }) {
           title: post.title.trim(),
           content: post.content.trim(),
           category: post.category,
-          is_private: post.is_private,
+          isPrivate: post.is_private,
         },
         selectedTags.map((tag) => tag.id)
       );

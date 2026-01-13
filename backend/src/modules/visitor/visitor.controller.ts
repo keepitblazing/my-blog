@@ -20,6 +20,12 @@ export class VisitorController {
     return { count };
   }
 
+  @Get('total')
+  async getTotalCount() {
+    const count = await this.visitorService.getTotalCount();
+    return { count };
+  }
+
   @Get('stats')
   async getStats(@Query('days') days?: string) {
     const daysNum = days ? parseInt(days, 10) : 30;
