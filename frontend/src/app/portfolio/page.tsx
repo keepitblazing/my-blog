@@ -8,7 +8,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import SectionTitle from "@/components/portfolio/SectionTitle";
 import SkillBadge from "@/components/portfolio/SkillBadge";
-import ProjectCard from "@/components/portfolio/ProjectCard";
+// import ProjectCard from "@/components/portfolio/ProjectCard";
 import GitHubStats from "@/components/portfolio/GitHubStats";
 import GitHubContributions from "@/components/portfolio/GitHubContributions";
 import Image from "next/image";
@@ -100,6 +100,7 @@ export default function PortfolioPage() {
 
   const api = [{ name: "REST API", starred: false }];
 
+  /* Projects - 임시 비활성화
   const projects = [
     {
       title: "BootShell VS Code Extension",
@@ -180,6 +181,7 @@ export default function PortfolioPage() {
       planned: true,
     },
   ];
+  */
 
   return (
     <div className="min-h-screen bg-blog-black">

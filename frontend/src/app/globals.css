@@ -374,3 +374,96 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+/* Bento Grid 애니메이션 */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes borderGlow {
+  0%, 100% {
+    border-color: #222225;
+  }
+  50% {
+    border-color: #3a3a3f;
+  }
+}
+
+.bento-item {
+  animation: fadeInUp 0.5s ease-out forwards;
+  opacity: 0;
+}
+
+.bento-item:nth-child(1) { animation-delay: 0ms; }
+.bento-item:nth-child(2) { animation-delay: 50ms; }
+.bento-item:nth-child(3) { animation-delay: 100ms; }
+.bento-item:nth-child(4) { animation-delay: 150ms; }
+.bento-item:nth-child(5) { animation-delay: 200ms; }
+.bento-item:nth-child(6) { animation-delay: 250ms; }
+.bento-item:nth-child(7) { animation-delay: 300ms; }
+.bento-item:nth-child(8) { animation-delay: 350ms; }
+.bento-item:nth-child(9) { animation-delay: 400ms; }
+.bento-item:nth-child(10) { animation-delay: 450ms; }
+
+.bento-card {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.bento-card:hover {
+  transform: translateY(-4px) scale(1.01);
+  border-color: #3a3a3f;
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+}
+
+.bento-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, transparent 0%, rgba(255,255,255,0.02) 50%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+.bento-card:hover::before {
+  opacity: 1;
+}
+
+.featured-card {
+  background: linear-gradient(135deg, #0a0a0a 0%, #111111 100%);
+}
+
+.featured-card:hover {
+  background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
+}
