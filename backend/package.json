@@ -16,7 +16,9 @@
     "db:studio": "drizzle-kit studio",
     "db:seed": "node dist/db/seed/index.js",
     "db:seed:dev": "ts-node -r tsconfig-paths/register src/db/seed/index.ts",
-    "db:export": "ts-node -r tsconfig-paths/register src/db/seed/export.ts"
+    "db:export": "ts-node -r tsconfig-paths/register src/db/seed/export.ts",
+    "db:velog": "ts-node -r tsconfig-paths/register src/db/seed/velog-migrate.ts",
+    "velog:fetch": "npx ts-node src/db/seed/velog-fetch.ts"
   },
   "keywords": [],
   "author": "",
@@ -27,6 +29,7 @@
     "@nestjs/config": "^4.0.2",
     "@nestjs/core": "^11.1.11",
     "@nestjs/platform-express": "^11.1.11",
+    "@nestjs/serve-static": "^5.0.4",
     "@nestjs/swagger": "^11.2.4",
     "csv-parse": "^6.1.0",
     "dotenv": "^17.2.3",

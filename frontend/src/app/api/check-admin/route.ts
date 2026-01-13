@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {
-  const homeIP = process.env.NEXT_PUBLIC_HOME_IP;
+  const homeIPv4 = process.env.NEXT_PUBLIC_HOME_IP;
+  const homeIPv6 = process.env.NEXT_PUBLIC_HOME_IP_V6;
 
   // X-Forwarded-For 또는 실제 IP 가져오기
   const forwarded = request.headers.get("x-forwarded-for");
@@ -10,7 +11,7 @@ export async function GET(request: NextRequest) {
 
   const clientIP = cfIP || forwarded?.split(",")[0]?.trim() || realIP || "unknown";
 
-  const isAdmin = clientIP === homeIP;
+  const isAdmin = clientIP === homeIPv4 || clientIP === homeIPv6;
 
   return NextResponse.json({ isAdmin });
 }

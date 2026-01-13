@@ -23,6 +23,17 @@ export default function PortfolioPage() {
     { name: "Electron", starred: false },
   ];
 
+  const mobileSkills = [
+    { name: "React Native", starred: false },
+    { name: "EAS Build", starred: false },
+  ];
+
+  const uiLibraries = [
+    { name: "Ant Design", starred: false },
+    { name: "MUI", starred: false },
+    { name: "shadcn/ui", starred: false },
+  ];
+
   const backendSkills = [{ name: "NestJS", starred: false }];
 
   const devopsSkills = [{ name: "Docker", starred: false }];
@@ -56,6 +67,7 @@ export default function PortfolioPage() {
     { name: "Webpack", starred: false },
     { name: "Vite", starred: false },
     { name: "Turbopack", starred: false },
+    { name: "Turborepo", starred: false },
     { name: "npm", starred: false },
     { name: "yarn", starred: false },
     { name: "pnpm", starred: false },
@@ -73,6 +85,7 @@ export default function PortfolioPage() {
     { name: "Google Analytics", starred: false },
     { name: "Microsoft Clarity", starred: false },
     { name: "Sentry", starred: false },
+    { name: "PostHog", starred: false },
   ];
 
   const realtime = [
@@ -241,6 +254,22 @@ export default function PortfolioPage() {
               </div>
             </div>
 
+            {/* Mobile */}
+            <div>
+              <h3 className="text-lg font-semibold text-blog-text mb-3">
+                Mobile
+              </h3>
+              <div className="flex flex-wrap gap-2">
+                {mobileSkills.map((skill) => (
+                  <SkillBadge
+                    key={skill.name}
+                    name={skill.name}
+                    starred={skill.starred}
+                  />
+                ))}
+              </div>
+            </div>
+
             {/* Backend */}
             <div>
               <h3 className="text-lg font-semibold text-blog-text mb-3">
@@ -312,6 +341,22 @@ export default function PortfolioPage() {
               </h3>
               <div className="flex flex-wrap gap-2">
                 {styling.map((skill) => (
+                  <SkillBadge
+                    key={skill.name}
+                    name={skill.name}
+                    starred={skill.starred}
+                  />
+                ))}
+              </div>
+            </div>
+
+            {/* UI Libraries */}
+            <div>
+              <h3 className="text-lg font-semibold text-blog-text mb-3">
+                UI Libraries
+              </h3>
+              <div className="flex flex-wrap gap-2">
+                {uiLibraries.map((skill) => (
                   <SkillBadge
                     key={skill.name}
                     name={skill.name}
@@ -496,7 +541,7 @@ export default function PortfolioPage() {
           </div>
         </section>
 
-        {/* Projects Section */}
+        {/* Projects Section - 임시 비활성화
         <section className="mb-12">
           <SectionTitle>Projects</SectionTitle>
 
@@ -506,6 +551,7 @@ export default function PortfolioPage() {
             ))}
           </div>
         </section>
+        */}
 
         {/* Skills Detail Section */}
         <section className="mb-12">
@@ -521,7 +567,7 @@ export default function PortfolioPage() {
               <div className="space-y-4">
                 <div>
                   <h4 className="font-semibold text-blog-text mb-2">
-                    Next.js ⭐
+                    Next.js ★
                   </h4>
                   <ul className="list-disc list-inside space-y-1 text-blog-text-muted text-sm">
                     <li>
@@ -534,7 +580,7 @@ export default function PortfolioPage() {
 
                 <div>
                   <h4 className="font-semibold text-blog-text mb-2">
-                    React ⭐
+                    React ★
                   </h4>
                   <ul className="list-disc list-inside space-y-1 text-blog-text-muted text-sm">
                     <li>
@@ -567,7 +613,7 @@ export default function PortfolioPage() {
               <div className="space-y-4">
                 <div>
                   <h4 className="font-semibold text-blog-text mb-2">
-                    TypeScript ⭐
+                    TypeScript ★
                   </h4>
                   <ul className="list-disc list-inside space-y-1 text-blog-text-muted text-sm">
                     <li>
@@ -725,7 +771,7 @@ export default function PortfolioPage() {
               <div className="space-y-4">
                 <div>
                   <h4 className="font-semibold text-blog-text mb-2">
-                    Tailwind CSS ⭐
+                    Tailwind CSS ★
                   </h4>
                   <ul className="list-disc list-inside space-y-1 text-blog-text-muted text-sm">
                     <li>
