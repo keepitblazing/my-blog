@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { PostWithTags } from "@/types/post";
-import TagBadge from "@/components/tags/TagBadge";
 import { formatDateMobile, formatDateDesktop } from "@/lib/utils";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLock, faArrowRight } from "@fortawesome/free-solid-svg-icons";
