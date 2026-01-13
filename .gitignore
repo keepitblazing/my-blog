@@ -24,3 +24,6 @@ dist
 # Uploads
 uploads/
 backend/uploads/
+
+# AI
+.claude
