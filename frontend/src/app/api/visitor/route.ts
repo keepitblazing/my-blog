@@ -7,9 +7,9 @@ export async function GET(request: NextRequest) {
   const type = searchParams.get("type");
 
   try {
-    let endpoint = "/visitors/count";
+    let endpoint = "/api/visitors/count";
     if (type === "total") {
-      endpoint = "/visitors/total";
+      endpoint = "/api/visitors/total";
     }
 
     const response = await fetch(`${API_URL}${endpoint}`);
@@ -22,5 +22,27 @@ export async function GET(request: NextRequest) {
   } catch (error) {
     console.error("Visitor count error:", error);
     return NextResponse.json({ count: 0 });
+  }
+}
+
+export async function POST(request: NextRequest) {
+  try {
+    const body = await request.json();
+
+    const response = await fetch(`${API_URL}/api/visitors/log`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to log visitor");
+    }
+
+    const data = await response.json();
+    return NextResponse.json(data);
+  } catch (error) {
+    console.error("Visitor log error:", error);
+    return NextResponse.json({ error: "Failed to log visitor" }, { status: 500 });
   }
 }
