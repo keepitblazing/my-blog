@@ -134,7 +134,7 @@ export default function Navbar() {
                   Keep it blazing🔥
                 </Link>
               </div>
-              <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
+              <div className="hidden md:ml-6 md:flex md:space-x-8">
                 <NavLinkComponent href="/" label="홈" isMobile={false} />
               </div>
             </div>
@@ -170,12 +170,12 @@ export default function Navbar() {
               </div>
             </div>
             {/* 방문자 수 표시 */}
-            <div className="hidden sm:flex items-center text-sm text-gray-400 space-x-4">
+            <div className="hidden md:flex items-center text-sm text-gray-400 space-x-4">
               <span>Today: {dailyVisitorCount}</span>
               <span>Total: {totalVisitorCount}</span>
             </div>
             {/* 모바일 메뉴 버튼 */}
-            <div className="flex items-center sm:hidden">
+            <div className="flex items-center md:hidden">
               <div className="mr-4 text-sm text-gray-400">
                 <span>
                   {dailyVisitorCount} | {totalVisitorCount}
@@ -199,7 +199,7 @@ export default function Navbar() {
 
         {/* 모바일 메뉴 오버레이 */}
         <div
-          className={`fixed top-16 inset-x-0 bottom-0 bg-black transition-opacity duration-300 ease-in-out sm:hidden ${
+          className={`fixed top-16 inset-x-0 bottom-0 bg-black transition-opacity duration-300 ease-in-out md:hidden ${
             isMobileMenuOpen
               ? "opacity-50 z-40"
               : "opacity-0 pointer-events-none"
@@ -209,7 +209,7 @@ export default function Navbar() {
 
         {/* 모바일 메뉴 */}
         <div
-          className={`absolute top-17 left-0 right-0 bg-black transform transition-all duration-300 ease-in-out sm:hidden ${
+          className={`absolute top-17 left-0 right-0 bg-black transform transition-all duration-300 ease-in-out md:hidden ${
             isMobileMenuOpen
               ? "translate-y-0 opacity-100"
               : "-translate-y-[10%] opacity-0 pointer-events-none"

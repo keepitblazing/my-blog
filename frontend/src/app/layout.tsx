@@ -1,48 +1,94 @@
-"use client";
-
+import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
-import { useEffect } from "react";
-import { usePathname } from "next/navigation";
+import VisitorTracker from "@/components/VisitorTracker";
+import Script from "next/script";
+
+export const metadata: Metadata = {
+  metadataBase: new URL("https://keepitblazing.kr"),
+  title: {
+    default: "Keep it blazing - 개발 블로그",
+    template: "%s | Keep it blazing",
+  },
+  description: "프론트엔드 개발자의 기술 블로그. React, Next.js, TypeScript 등 웹 개발 관련 글을 공유합니다.",
+  keywords: ["개발 블로그", "프론트엔드", "React", "Next.js", "TypeScript", "웹 개발"],
+  authors: [{ name: "Keep it blazing" }],
+  creator: "Keep it blazing",
+  openGraph: {
+    type: "website",
+    locale: "ko_KR",
+    url: "https://keepitblazing.kr",
+    siteName: "Keep it blazing",
+    title: "Keep it blazing - 개발 블로그",
+    description: "프론트엔드 개발자의 기술 블로그. React, Next.js, TypeScript 등 웹 개발 관련 글을 공유합니다.",
+    images: [
+      {
+        url: "/door.png",
+        width: 1200,
+        height: 630,
+        alt: "Keep it blazing",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Keep it blazing - 개발 블로그",
+    description: "프론트엔드 개발자의 기술 블로그",
+    images: ["/door.png"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION,
+  },
+};
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const pathname = usePathname();
-
-  useEffect(() => {
-    fetch("/api/visitor", {
-      method: "POST",
-    }).catch(console.error);
-  }, [pathname]);
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "Keep it blazing",
+    url: "https://keepitblazing.kr",
+    description: "프론트엔드 개발자의 기술 블로그",
+    potentialAction: {
+      "@type": "SearchAction",
+      target: "https://keepitblazing.kr/tags/{search_term_string}",
+      "query-input": "required name=search_term_string",
+    },
+  };
 
   return (
     <html lang="ko">
       <head>
-        <meta property="og:title" content="Keep it blazing🔥" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta
-          property="og:description"
-          content="개발 관련 글을 작성하고 공유하는 블로그입니다."
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        <meta property="og:image" content="https://keepitblazing.kr/door.png" />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
-        <meta property="og:image:type" content="image/png" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Keep it blazing🔥" />
-        <meta
-          name="twitter:description"
-          content="개발 관련 글을 작성하고 공유하는 블로그입니다."
-        />
-        <meta
-          name="twitter:image"
-          content="https://keepitblazing.kr/door.png"
-        />
+      </head>
+      <body
+        suppressHydrationWarning
+        className="min-h-screen bg-black text-white"
+      >
+        <VisitorTracker />
+        <Navbar />
+        <main className="max-w-7xl mx-auto p-2">{children}</main>
         {process.env.NEXT_PUBLIC_CLARITY_ID && (
-          <script
+          <Script
+            id="clarity"
+            strategy="afterInteractive"
             dangerouslySetInnerHTML={{
               __html: `
                 (function(c,l,a,r,i,t,y){
@@ -54,13 +100,6 @@ export default function RootLayout({
             }}
           />
         )}
-      </head>
-      <body
-        suppressHydrationWarning
-        className="min-h-screen bg-black text-white"
-      >
-        <Navbar />
-        <main className="max-w-7xl mx-auto p-2">{children}</main>
       </body>
     </html>
   );

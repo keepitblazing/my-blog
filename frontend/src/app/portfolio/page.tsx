@@ -441,12 +441,17 @@ export default function PortfolioPage() {
 
           <div className="bg-blog-black border border-blog-grey rounded-lg p-6">
             <div className="flex items-center gap-4 mb-4">
-              <img
-                src="/dayjs.png"
-                alt="Day.js"
-                className="w-16 h-16 rounded-md cursor-pointer hover:opacity-80 transition-all animate-pulse-border"
+              <div
+                className="relative w-16 h-16 rounded-md overflow-hidden cursor-pointer hover:opacity-80 transition-all animate-pulse-border"
                 onClick={() => setIsImageExpanded(!isImageExpanded)}
-              />
+              >
+                <Image
+                  src="/dayjs.png"
+                  alt="Day.js"
+                  fill
+                  className="object-cover"
+                />
+              </div>
               <div>
                 <h3 className="text-xl font-bold text-blog-text">
                   Day.js 한국어 문서 번역
@@ -457,13 +462,18 @@ export default function PortfolioPage() {
               </div>
             </div>
             {isImageExpanded && (
-              <div className="mb-4 flex justify-center">
-                <img
-                  src="/dayjs.png"
-                  alt="Day.js"
-                  className="max-w-full h-auto rounded-md cursor-pointer"
-                  onClick={() => setIsImageExpanded(false)}
-                />
+              <div
+                className="mb-4 flex justify-center cursor-pointer"
+                onClick={() => setIsImageExpanded(false)}
+              >
+                <div className="relative w-full max-w-md h-64 rounded-md overflow-hidden">
+                  <Image
+                    src="/dayjs.png"
+                    alt="Day.js"
+                    fill
+                    className="object-contain"
+                  />
+                </div>
               </div>
             )}
             <p className="text-blog-text mb-4">
