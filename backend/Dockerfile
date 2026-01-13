@@ -24,6 +24,7 @@ COPY --from=builder /app/package.json /app/pnpm-lock.yaml ./
 RUN pnpm install --frozen-lockfile --prod
 
 COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/src/db/seed/data ./dist/db/seed/data
 
 # uploads 폴더 생성
 RUN mkdir -p /app/uploads

@@ -14,7 +14,8 @@
     "db:migrate": "drizzle-kit migrate",
     "db:push": "drizzle-kit push",
     "db:studio": "drizzle-kit studio",
-    "db:seed": "ts-node -r tsconfig-paths/register src/db/seed/index.ts",
+    "db:seed": "node dist/db/seed/index.js",
+    "db:seed:dev": "ts-node -r tsconfig-paths/register src/db/seed/index.ts",
     "db:export": "ts-node -r tsconfig-paths/register src/db/seed/export.ts"
   },
   "keywords": [],
