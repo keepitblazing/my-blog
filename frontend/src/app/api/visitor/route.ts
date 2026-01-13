@@ -27,7 +27,12 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json();
+    let body = {};
+    try {
+      body = await request.json();
+    } catch {
+      // empty body is ok
+    }
 
     const response = await fetch(`${API_URL}/api/visitors/log`, {
       method: "POST",
