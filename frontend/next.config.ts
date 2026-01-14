@@ -27,7 +27,7 @@ const nextConfig: NextConfig = {
               "style-src 'self' 'unsafe-inline' https://uicdn.toast.com",
               "img-src 'self' data: blob: https://avatars.githubusercontent.com https://www.clarity.ms",
               "font-src 'self' data:",
-              "connect-src 'self' https://www.clarity.ms",
+              "connect-src 'self' https://www.clarity.ms https://api.keepitblazing.kr",
               "frame-src 'self'",
               "object-src 'none'",
               "base-uri 'self'",
