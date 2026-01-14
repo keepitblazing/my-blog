@@ -5,8 +5,7 @@ import { TagWithCount } from "@/types/tag";
 import { getTagsWithCount } from "@/lib/api";
 import Link from "next/link";
 import { TagGridSkeleton } from "@/components/skeleton/TagSkeleton";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTag } from "@fortawesome/free-solid-svg-icons";
+import { Tag } from "lucide-react";
 
 export default function AllTagsClient() {
   const [tags, setTags] = useState<TagWithCount[]>([]);
@@ -44,10 +43,7 @@ export default function AllTagsClient() {
 
       {tags.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-12 border-2 border-[#222225] rounded-lg">
-          <FontAwesomeIcon
-            icon={faTag}
-            className="text-4xl text-gray-400 mb-4"
-          />
+          <Tag className="w-10 h-10 text-gray-400 mb-4" />
           <p className="text-xl text-gray-400">아직 태그가 없습니다</p>
         </div>
       ) : (

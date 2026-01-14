@@ -7,6 +7,7 @@ export interface VisitorLogData {
   ipAddress: string;
   userAgent: string;
   pagePath: string;
+  isNewVisitor?: boolean;
 }
 
 export async function logVisitor(data: VisitorLogData): Promise<void> {
@@ -16,6 +17,11 @@ export async function logVisitor(data: VisitorLogData): Promise<void> {
 export async function getDailyVisitorCount(date?: string): Promise<number> {
   const query = date ? `?date=${date}` : '';
   const result = await api.get<{ count: number }>(`/visitors/count${query}`);
+  return result.count;
+}
+
+export async function getTotalVisitorCount(): Promise<number> {
+  const result = await api.get<{ count: number }>('/visitors/total');
   return result.count;
 }
 

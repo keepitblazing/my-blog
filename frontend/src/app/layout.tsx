@@ -1,8 +1,18 @@
 import type { Metadata } from "next";
+import { Noto_Sans_KR } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import VisitorTracker from "@/components/VisitorTracker";
+import PageTransition from "@/components/PageTransition";
 import Script from "next/script";
+
+const notoSansKR = Noto_Sans_KR({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+  preload: true,
+  variable: "--font-noto-sans-kr",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://keepitblazing.kr"),
@@ -71,8 +81,10 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="ko">
+    <html lang="ko" className={notoSansKR.variable}>
       <head>
+        <link rel="preconnect" href="https://www.clarity.ms" />
+        <link rel="dns-prefetch" href="https://www.clarity.ms" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -80,11 +92,13 @@ export default function RootLayout({
       </head>
       <body
         suppressHydrationWarning
-        className="min-h-screen bg-black text-white"
+        className={`min-h-screen bg-black text-white font-sans ${notoSansKR.className}`}
       >
         <VisitorTracker />
         <Navbar />
-        <main className="max-w-7xl mx-auto p-2">{children}</main>
+        <main className="max-w-7xl mx-auto p-2">
+          <PageTransition>{children}</PageTransition>
+        </main>
         {process.env.NEXT_PUBLIC_CLARITY_ID && (
           <Script
             id="clarity"

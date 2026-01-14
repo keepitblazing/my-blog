@@ -1,8 +1,7 @@
 'use client';
 
 import Link from "next/link";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import { ArrowLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 interface MobileBackButtonProps {
@@ -31,7 +30,7 @@ export default function MobileBackButton({
         onClick={handleBack}
         className="sm:hidden inline-flex items-center gap-2 px-4 py-2 text-white rounded-lg hover:bg-[#2a2a2f] transition-colors mb-6"
       >
-        <FontAwesomeIcon icon={faArrowLeft} />
+        <ArrowLeft className="w-4 h-4" />
         <span>{label}</span>
       </button>
     );
@@ -43,7 +42,7 @@ export default function MobileBackButton({
         href={href}
         className="sm:hidden inline-flex items-center gap-2 px-4 py-2 text-white rounded-lg hover:bg-[#2a2a2f] transition-colors mb-6"
       >
-        <FontAwesomeIcon icon={faArrowLeft} />
+        <ArrowLeft className="w-4 h-4" />
         <span>{label}</span>
       </Link>
     );

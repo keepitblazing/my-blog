@@ -7,8 +7,7 @@ import { getPostsByTag, getTagBySlug } from "@/lib/api";
 import PostList from "@/components/post/PostList";
 import { PostListSkeleton } from "@/components/skeleton/PostSkeleton";
 import Link from "next/link";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import { ArrowLeft } from "lucide-react";
 import MobileBackButton from "@/components/MobileBackButton";
 
 interface TagPostsClientProps {
@@ -82,7 +81,7 @@ export default function TagPostsClient({ tagSlug }: TagPostsClientProps) {
           href="/"
           className="inline-flex items-center gap-2 px-4 py-2 text-white bg-[#222225] rounded-lg hover:bg-[#2a2a2f] transition-colors"
         >
-          <FontAwesomeIcon icon={faArrowLeft} />
+          <ArrowLeft className="w-4 h-4" />
           홈으로 돌아가기
         </Link>
       </div>

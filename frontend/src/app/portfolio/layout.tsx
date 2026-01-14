@@ -1,15 +1,27 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "박지민 | 프론트엔드 개발자 포트폴리오",
-  description: "React, Next.js, TypeScript를 활용한 프론트엔드 개발자 박지민의 포트폴리오입니다. 웹 개발 프로젝트와 오픈소스 기여 경험을 소개합니다.",
-  keywords: ["프론트엔드", "개발자", "포트폴리오", "React", "Next.js", "TypeScript", "박지민", "Frontend Developer", "Portfolio"],
+  title: "박지민 | 프론트엔드 개발자 Portfolio",
+  description:
+    "React, Next.js, TypeScript를 활용한 프론트엔드 개발자 박지민의 Portfolio입니다. 웹 개발 프로젝트와 오픈소스 기여 경험을 소개합니다.",
+  keywords: [
+    "프론트엔드",
+    "개발자",
+    "Portfolio",
+    "React",
+    "Next.js",
+    "TypeScript",
+    "박지민",
+    "Frontend Developer",
+    "Portfolio",
+  ],
   authors: [{ name: "박지민", url: "https://github.com/keepitblazing" }],
   creator: "박지민",
   publisher: "박지민",
   openGraph: {
-    title: "박지민 | 프론트엔드 개발자 포트폴리오",
-    description: "React, Next.js, TypeScript를 활용한 프론트엔드 개발자의 포트폴리오",
+    title: "박지민 | 프론트엔드 개발자 Portfolio",
+    description:
+      "React, Next.js, TypeScript를 활용한 프론트엔드 개발자의 Portfolio",
     url: "https://keepitblazing.kr/portfolio",
     siteName: "Keep it Blazing",
     images: [
@@ -17,7 +29,7 @@ export const metadata: Metadata = {
         url: "https://keepitblazing.kr/api/og-portfolio",
         width: 1200,
         height: 630,
-        alt: "박지민 프론트엔드 개발자 포트폴리오",
+        alt: "박지민 프론트엔드 개발자 Portfolio",
       },
     ],
     locale: "ko_KR",
@@ -25,8 +37,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "박지민 | 프론트엔드 개발자 포트폴리오",
-    description: "React, Next.js, TypeScript를 활용한 프론트엔드 개발자의 포트폴리오",
+    title: "박지민 | 프론트엔드 개발자 Portfolio",
+    description:
+      "React, Next.js, TypeScript를 활용한 프론트엔드 개발자의 Portfolio",
     images: ["https://keepitblazing.kr/api/og-portfolio"],
     creator: "@keepitblazing",
   },

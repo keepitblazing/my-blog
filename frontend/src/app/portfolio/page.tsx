@@ -1,11 +1,6 @@
 "use client";
 import Link from "next/link";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGithub } from "@fortawesome/free-brands-svg-icons";
-import {
-  faEnvelope,
-  faExternalLinkAlt,
-} from "@fortawesome/free-solid-svg-icons";
+import { Github, Mail, ExternalLink } from "lucide-react";
 import SectionTitle from "@/components/portfolio/SectionTitle";
 import SkillBadge from "@/components/portfolio/SkillBadge";
 // import ProjectCard from "@/components/portfolio/ProjectCard";
@@ -196,12 +191,12 @@ export default function PortfolioPage() {
                 width={128}
                 height={128}
                 className="rounded-full"
+                placeholder="blur"
+                blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAMCAgMCAgMDAwMEAwMEBQgFBQQEBQoHBwYIDAoMCwsKCwsNDhIQDQ4RDgsLEBYQERMUFRUVDA8XGBYUGBIUFRT/2wBDAQMEBAUEBQkFBQkUDQsNFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBT/wAARCAAIAAoDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAAAAYH/8QAIhAAAQQBAwUAAAAAAAAAAAAAAQIDBAUABhESEyExQVH/xAAVAQEBAAAAAAAAAAAAAAAAAAADBP/EABkRAAIDAQAAAAAAAAAAAAAAAAABAgMRIf/aAAwDAQACEQMRAD8A2HS9jX2tHSWdhBipZkuOx3Aw8p1TYbbWkJWFAcuoJIO3fGK2nSlGprStqoNJJjR2WXHEw2g24pKAlRSoJBIJAO29sYxyJM2i0f/Z"
               />
             </div>
             <div className="text-center sm:text-left flex-1">
-              <h1 className="text-4xl font-bold text-blog-text mb-2">
-                Jimin Park
-              </h1>
+              <h1 className="text-4xl font-bold text-blog-text mb-2">Kyle</h1>
               <p className="text-xl text-blog-text-muted mb-4">
                 Frontend Developer
               </p>
@@ -212,14 +207,14 @@ export default function PortfolioPage() {
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-4 py-2 bg-blog-grey text-blog-text rounded-md hover:bg-blog-grey-hover transition-colors"
                 >
-                  <FontAwesomeIcon icon={faGithub} />
+                  <Github className="w-4 h-4" />
                   GitHub
                 </Link>
                 <Link
                   href="mailto:keepinblazing@gmail.com"
                   className="inline-flex items-center gap-2 px-4 py-2 bg-blog-grey text-blog-text rounded-md hover:bg-blog-grey-hover transition-colors"
                 >
-                  <FontAwesomeIcon icon={faEnvelope} />
+                  <Mail className="w-4 h-4" />
                   Contact
                 </Link>
               </div>
@@ -497,6 +492,8 @@ export default function PortfolioPage() {
                   alt="Day.js"
                   fill
                   className="object-cover"
+                  placeholder="blur"
+                  blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAMCAgMCAgMDAwMEAwMEBQgFBQQEBQoHBwYIDAoMCwsKCwsNDhIQDQ4RDgsLEBYQERMUFRUVDA8XGBYUGBIUFRT/2wBDAQMEBAUEBQkFBQkUDQsNFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBT/wAARCAAIAAoDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAAAAUG/8QAIRAAAQQCAQUBAAAAAAAAAAAAAQIDBAUABhESEyExQVH/xAAVAQEBAAAAAAAAAAAAAAAAAAACA//EABgRAQEBAQEAAAAAAAAAAAAAAAECABEh/9oADAMBEQCEPwDTNIu9d2LVbKdWRIimr+64w2y6pZZcQhSwoBSOPkA+Z5ydm6/qOuaHrVZCU2Uy68h6bIcHl15xTjiuf3k+ZhhhJm3Nf//Z"
                 />
               </div>
               <div>
@@ -519,6 +516,8 @@ export default function PortfolioPage() {
                     alt="Day.js"
                     fill
                     className="object-contain"
+                    placeholder="blur"
+                    blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAMCAgMCAgMDAwMEAwMEBQgFBQQEBQoHBwYIDAoMCwsKCwsNDhIQDQ4RDgsLEBYQERMUFRUVDA8XGBYUGBIUFRT/2wBDAQMEBAUEBQkFBQkUDQsNFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBT/wAARCAAIAAoDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAAAAUG/8QAIRAAAQQCAQUBAAAAAAAAAAAAAQIDBAUABhESEyExQVH/xAAVAQEBAAAAAAAAAAAAAAAAAAACA//EABgRAQEBAQEAAAAAAAAAAAAAAAECABEh/9oADAMBEQCEPwDTNIu9d2LVbKdWRIimr+64w2y6pZZcQhSwoBSOPkA+Z5ydm6/qOuaHrVZCU2Uy68h6bIcHl15xTjiuf3k+ZhhhJm3Nf//Z"
                   />
                 </div>
               </div>
@@ -537,7 +536,7 @@ export default function PortfolioPage() {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 text-blog-text hover:text-blog-white transition-colors"
             >
-              <FontAwesomeIcon icon={faExternalLinkAlt} />
+              <ExternalLink className="w-4 h-4" />
               Day.js Repository
             </Link>
           </div>
@@ -581,9 +580,7 @@ export default function PortfolioPage() {
                 </div>
 
                 <div>
-                  <h4 className="font-semibold text-blog-text mb-2">
-                    React ★
-                  </h4>
+                  <h4 className="font-semibold text-blog-text mb-2">React ★</h4>
                   <ul className="list-disc list-inside space-y-1 text-blog-text-muted text-sm">
                     <li>
                       React Hooks을 활용한 컴포넌트 상태 및 수명 주기 관리 가능

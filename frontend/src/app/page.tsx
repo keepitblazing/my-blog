@@ -3,12 +3,10 @@
 import { usePosts } from "@/hooks/usePosts";
 import PostList from "@/components/post/PostList";
 import ErrorDisplay from "@/components/ErrorDisplay";
-import { PostListSkeleton } from "@/components/skeleton/PostSkeleton";
+import { PostListSkeleton, AboutMeSkeleton } from "@/components/skeleton/PostSkeleton";
 import Link from "next/link";
 import Image from "next/image";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGithub } from "@fortawesome/free-brands-svg-icons";
-import { faUser, faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import { Github, User, Mail } from "lucide-react";
 
 export default function Home() {
   const { posts, loading, error } = usePosts("all");
@@ -16,6 +14,7 @@ export default function Home() {
   if (loading) {
     return (
       <div className="max-w-7xl mx-auto py-8 px-4">
+        <AboutMeSkeleton />
         <PostListSkeleton />
       </div>
     );
@@ -36,6 +35,8 @@ export default function Home() {
               alt="박지민"
               fill
               className="object-cover"
+              placeholder="blur"
+              blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAMCAgMCAgMDAwMEAwMEBQgFBQQEBQoHBwYIDAoMCwsKCwsNDhIQDQ4RDgsLEBYQERMUFRUVDA8XGBYUGBIUFRT/2wBDAQMEBAUEBQkFBQkUDQsNFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBT/wAARCAAIAAoDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAAAAYH/8QAIhAAAQQBAwUAAAAAAAAAAAAAAQIDBAUABhESEyExQVH/xAAVAQEBAAAAAAAAAAAAAAAAAAADBP/EABkRAAIDAQAAAAAAAAAAAAAAAAABAgMRIf/aAAwDAQACEQMRAD8A2HS9jX2tHSWdhBipZkuOx3Aw8p1TYbbWkJWFAcuoJIO3fGK2nSlGprStqoNJJjR2WXHEw2g24pKAlRSoJBIJAO29sYxyJM2i0f/Z"
             />
           </div>
           <div className="flex-1 text-center sm:text-left">
@@ -48,7 +49,7 @@ export default function Home() {
                 href="/portfolio"
                 className="inline-flex items-center gap-2 px-3 py-1.5 bg-blog-grey text-blog-text text-sm rounded-md hover:bg-blog-grey-hover transition-colors"
               >
-                <FontAwesomeIcon icon={faUser} />
+                <User className="w-4 h-4" />
                 포트폴리오
               </Link>
               <Link
@@ -57,14 +58,14 @@ export default function Home() {
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-3 py-1.5 bg-blog-grey text-blog-text text-sm rounded-md hover:bg-blog-grey-hover transition-colors"
               >
-                <FontAwesomeIcon icon={faGithub} />
+                <Github className="w-4 h-4" />
                 GitHub
               </Link>
               <Link
                 href="mailto:keepitblazing@keepitblazing.kr"
                 className="inline-flex items-center gap-2 px-3 py-1.5 bg-blog-grey text-blog-text text-sm rounded-md hover:bg-blog-grey-hover transition-colors"
               >
-                <FontAwesomeIcon icon={faEnvelope} />
+                <Mail className="w-4 h-4" />
                 Email
               </Link>
             </div>

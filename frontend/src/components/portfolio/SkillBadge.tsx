@@ -1,5 +1,4 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { Star } from "lucide-react";
 
 interface SkillBadgeProps {
   name: string;
@@ -14,7 +13,7 @@ export default function SkillBadge({ name, starred = false }: SkillBadgeProps) {
         : 'bg-blog-black text-blog-text border border-blog-grey hover:bg-blog-grey hover:text-blog-white'
     }`}>
       {name}
-      {starred && <FontAwesomeIcon icon={faStar} className="ml-1.5 text-gray-500 text-xs" />}
+      {starred && <Star className="ml-1.5 w-3 h-3 text-gray-500" />}
     </span>
   );
 }

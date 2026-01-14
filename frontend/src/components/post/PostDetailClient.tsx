@@ -7,15 +7,18 @@ import { formatDateMobile, formatDateDesktop } from "@/lib/utils";
 import { getPostById, deletePost, Post } from "@/lib/api";
 import TagBadge from "@/components/tags/TagBadge";
 import MobileBackButton from "@/components/MobileBackButton";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faArrowLeft,
-  faEdit,
-  faTrash,
-} from "@fortawesome/free-solid-svg-icons";
+import { ArrowLeft, Pencil, Trash2 } from "lucide-react";
 import PostDetailSkeleton from "@/components/skeleton/PostDetailSkeleton";
-import "@toast-ui/editor/dist/toastui-editor-viewer.css";
-import { Viewer } from "@toast-ui/react-editor";
+import dynamic from "next/dynamic";
+import DOMPurify from "isomorphic-dompurify";
+
+const Viewer = dynamic(
+  () => import("@toast-ui/react-editor").then((mod) => mod.Viewer),
+  {
+    ssr: false,
+    loading: () => <div className="animate-pulse bg-gray-800 h-40 rounded" />,
+  }
+);
 
 interface PostDetailClientProps {
   id: string;
@@ -99,7 +102,7 @@ export default function PostDetailClient({
           href="/"
           className="inline-flex items-center gap-2 px-4 py-2 text-white bg-[#222225] rounded-lg hover:bg-[#2a2a2f] transition-colors"
         >
-          <FontAwesomeIcon icon={faArrowLeft} />
+          <ArrowLeft className="w-4 h-4" />
           뒤로가기
         </Link>
       </div>
@@ -122,7 +125,7 @@ export default function PostDetailClient({
                   className="inline-flex items-center justify-center sm:justify-start gap-2 px-2 sm:px-4 py-1 text-sm sm:text-base text-white bg-[#222225] rounded-lg hover:bg-[#2a2a2f] transition-colors min-w-[2.5rem] sm:min-w-0"
                   title="수정"
                 >
-                  <FontAwesomeIcon icon={faEdit} />
+                  <Pencil className="w-4 h-4" />
                   <span className="hidden sm:inline">수정</span>
                 </Link>
                 <button
@@ -133,7 +136,7 @@ export default function PostDetailClient({
                   }`}
                   title="삭제"
                 >
-                  <FontAwesomeIcon icon={faTrash} />
+                  <Trash2 className="w-4 h-4" />
                   <span className="hidden sm:inline">
                     {isDeleting ? "삭제 중..." : "삭제"}
                   </span>
@@ -149,8 +152,12 @@ export default function PostDetailClient({
               {formatDateMobile(post.created_at)}
             </span>
           </div>
+          <link
+            rel="stylesheet"
+            href="https://uicdn.toast.com/editor/latest/toastui-editor-viewer.min.css"
+          />
           <div className="prose prose-invert max-w-none text-gray-200">
-            <Viewer initialValue={post.content} />
+            <Viewer initialValue={DOMPurify.sanitize(post.content)} />
           </div>
           {post.tags && post.tags.length > 0 && (
             <div className="mt-8 pt-6 border-t border-[#222225]">

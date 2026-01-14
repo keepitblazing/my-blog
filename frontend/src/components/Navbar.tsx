@@ -3,8 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { Menu, X } from "lucide-react";
 
 interface NavLink {
   href: string;
@@ -70,6 +69,8 @@ export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [dailyVisitorCount, setDailyVisitorCount] = useState(0);
   const [totalVisitorCount, setTotalVisitorCount] = useState(0);
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
 
   useEffect(() => {
     setMounted(true);
@@ -122,10 +123,46 @@ export default function Navbar() {
     };
   }, [isMobileMenuOpen, mounted]);
 
+  // 스크롤 시 헤더 숨김/표시
+  useEffect(() => {
+    if (!mounted) return;
+
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      // 모바일 메뉴가 열려있으면 항상 표시
+      if (isMobileMenuOpen) {
+        setIsVisible(true);
+        return;
+      }
+
+      // 상단 근처(100px 이하)에서는 항상 표시
+      if (currentScrollY < 100) {
+        setIsVisible(true);
+        setLastScrollY(currentScrollY);
+        return;
+      }
+
+      // 스크롤 방향 감지
+      if (currentScrollY > lastScrollY) {
+        // 아래로 스크롤 - 숨김
+        setIsVisible(false);
+      } else {
+        // 위로 스크롤 - 표시
+        setIsVisible(true);
+      }
+
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [mounted, lastScrollY, isMobileMenuOpen]);
+
   // 클라이언트 사이드 렌더링이 완료되기 전까지는 기본 UI만 표시
   if (!mounted) {
     return (
-      <nav className="bg-black border-b border-[#222225] relative z-50">
+      <nav className={`bg-black border-b border-[#222225] sticky top-0 z-50 transition-transform duration-300 ${isVisible ? "translate-y-0" : "-translate-y-full"}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16">
             <div className="flex">
@@ -146,7 +183,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="bg-black border-b border-[#222225] relative z-50">
+      <nav className={`bg-black border-b border-[#222225] sticky top-0 z-50 transition-transform duration-300 ${isVisible ? "translate-y-0" : "-translate-y-full"}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16">
             <div className="flex">
@@ -188,9 +225,9 @@ export default function Navbar() {
               >
                 <span className="sr-only">메뉴 열기</span>
                 {!isMobileMenuOpen ? (
-                  <FontAwesomeIcon icon={faBars} className="block text-lg" />
+                  <Menu className="w-5 h-5" />
                 ) : (
-                  <FontAwesomeIcon icon={faXmark} className="block text-lg" />
+                  <X className="w-5 h-5" />
                 )}
               </button>
             </div>
